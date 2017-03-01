@@ -1,5 +1,28 @@
 {"intents": [
-    {"intent": "RecipeIntent", "slots": [{"name" : "Item", "type": "LIST_OF_ITEMS"}]},
+    {
+        "intent": "HasItem", 
+        "slots": [
+            {
+                "name" : "Item", 
+                "type": "AMAZON.LITERAL"
+            }
+        ]
+    },
+
+    {
+        "intent": "AddItem", 
+        "slots": [
+            {
+                "name": "Item",
+                "type": "AMAZON.LITERAL"
+            }
+            {
+                "name": "Quantity",
+                "type": "AMAZON.LITERAL"
+            }
+        ]
+    },
+
     {"intent": "AMAZON.RepeatIntent"},
     {"intent": "AMAZON.HelpIntent"},
     {"intent": "AMAZON.StopIntent"},
