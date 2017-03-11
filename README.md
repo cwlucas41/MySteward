@@ -1,5 +1,7 @@
 # Step-by-Step Guide to Build a How-To Skill
 
+https://github.com/alexa/alexa-skills-kit-sdk-for-nodejs
+
 We have launched a new skill template that makes it easy for developers and non-developers to create a skill similar to “DrinkMaster”, "Aromatherapy", "Timed Meditation", "Minecraft Helper", etc. These type of skills share the unique ability to parameterize what the user says and map it to a content catalog. For example, a user might say "Alexa, Ask Aromatherapy for a recipe for focus" and Alexa would map the word "focus" to the correct oil combination in the content catalog. Or, a user might say "Alexa, Ask DrinkMaster how to make a Margarita" and Alexa would map the word "margarita" to the correct drink recipe in the content catalog.
 
 The template leverages [AWS Lambda](https://aws.amazon.com/lambda/), the [Alexa Skills Kit (ASK)](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit), and the [ASK SDK](https://developer.amazon.com/public/community/post/Tx213D2XQIYH864/Announcing-the-Alexa-Skills-Kit-for-Node-js), while providing the business logic, multiple language support, use cases, error handling and help functions for your skill. You just need to come up with a content idea (like "Snack Recipes"), plug in your content and edit the sample provided (we walk you through how it’s done). It's a valuable way to quickly learn the end-to-end process for building and publishing an Alexa skill.
