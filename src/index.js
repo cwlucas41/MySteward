@@ -3,17 +3,14 @@
 const Alexa = require('alexa-sdk');
 const recipes = require('./recipes');
 const dynasty = require('dynasty')({});
-const newSession = require('./intentDelegates/newSession');
-const recipeIntent = require('./intentDelegates/recipeIntent');
+const addItem = require('./intentDelegates/addItem');
 
 const APP_ID = "amzn1.ask.skill.8371afd6-d231-4b54-bf1d-5987733228cd";
 const stewardItems = dynasty.table('Steward_Items');
 
 const handlers = {
 
-    'NewSession': function() { newSession.delegate(this, stewardItems) },
-
-    'RecipeIntent': function () { recipeIntent.delegate(this, stewardItems) },
+    'AddItem': function() { addItem.delegate(this, stewardItems) },
 
     'AMAZON.HelpIntent': function () {
         this.attributes.speechOutput = this.t('HELP_MESSAGE');
