@@ -3,8 +3,8 @@
 const Alexa = require('alexa-sdk');
 const recipes = require('./recipes');
 const dynasty = require('dynasty')({});
-const newSession = require('./newSession');
-const recipeIntent = require('./recipeIntent');
+const newSession = require('./intentDelegates/newSession');
+const recipeIntent = require('./intentDelegates/recipeIntent');
 
 const APP_ID = "amzn1.ask.skill.8371afd6-d231-4b54-bf1d-5987733228cd";
 const stewardItems = dynasty.table('Steward_Items');
