@@ -18,12 +18,11 @@ module.exports = {
         table
         .insert(record)
         .then(function(resp) {
-            handler.attributes.speechOutput = handler.t('WELCOME_MESSAGE', handler.t('SKILL_NAME'));
-            handler.attributes.repromptSpeech = handler.t('WELCOME_REPROMT');
-            handler.emit(':ask', handler.attributes.speechOutput, handler.attributes.repromptSpeech);
+            handler.emit('Affirmative');
         })
         .catch(function(err) {
             console.log(err);
+            handler.emit(':tell', handler.t('DATABASE_ERROR'));
         });
     }
 };
