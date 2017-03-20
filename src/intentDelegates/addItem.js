@@ -1,19 +1,15 @@
 'use strict';
 
-module.exports = {
-    delegate: function(handler, table) {
+module.exports = function(handler, table) {
 
-        var record = {
-            userId: handler.event.session.user.userId,
-        }
+    var record = {
+        userId: handler.event.session.user.userId,
+    }
 
-        const slots = handler.event.request.intent.slots
+    const slots = handler.event.request.intent.slots
 
-        if (slots.Item && slots.Item.value) {
-            record.itemName = slots.Item.value.toLowerCase();
-        } else {
-            console.log("error with itemName slot");
-        }
+    if (slots.Item && slots.Item.value) {
+        record.itemName = slots.Item.value.toLowerCase();
 
         table
         .insert(record)
@@ -22,7 +18,11 @@ module.exports = {
         })
         .catch(function(err) {
             console.log(err);
-            handler.emit(':tell', handler.t('DATABASE_ERROR'));
+            handler.emit('ERROR');
         });
+
+    } else {
+        console.log("error with itemName slot");
+        handler.emit('Error')
     }
-};
+}

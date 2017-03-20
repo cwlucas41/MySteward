@@ -10,12 +10,16 @@ const stewardItems = dynasty.table('Steward_Items');
 
 const handlers = {
 
-    'AddItem': function() { addItem.delegate(this, stewardItems) },
+    'AddItem': function() { addItem(this, stewardItems) },
 
     'Affirmative': function() {
         const responses = this.t('AFFIRMATIVE_MESSAGE');
         const idx = Math.floor(Math.random() * responses.length);
         this.emit(':tell', responses[idx]);
+    },
+
+    'Error': function() {
+        this.emit(':tell', this.t('ERROR_MESSAGE'))
     },
 
     'AMAZON.HelpIntent': function () {
@@ -36,7 +40,7 @@ const handlers = {
 
 exports.handler = (event, context) => {
     const alexa = Alexa.handler(event, context);
-    alexa.APP_ID = APP_ID;
+    alexa.appId = APP_ID;
     // To enable string internationalization (i18n) features, set a resources object.
     alexa.resources = languageStrings.strings;
     alexa.registerHandlers(handlers);
