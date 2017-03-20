@@ -1,0 +1,5 @@
+AddItem add {Item}
+AddItem I have a {Item}
+AddItem I have an {Item}
+AddItem I bought a {Item}
+AddItem I bought an {Item}

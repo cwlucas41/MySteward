@@ -1,27 +1,23 @@
 {
-  "name": "skill-sample-nodejs-howto-i18n",
+  "name": "my_steward",
   "version": "1.0.0",
-  "description": "How-to skill sample i18n version",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alexa/skill-sample-nodejs-howto.git"
+    "url": "git+https://github.com/cwlucas41/MySteward.git"
   },
-  "keywords": [
-    "Alexa",
-    "skill",
-    "howto"
-  ],
-  "author": "Amazon.com",
-  "license": "Apache-2.0",
+  "author": "",
+  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/alexa/skill-sample-nodejs-howto/issues"
+    "url": "https://github.com/cwlucas41/MySteward/issues"
   },
-  "homepage": "https://github.com/alexa/skill-sample-nodejs-howto#readme",
+  "homepage": "https://github.com/cwlucas41/MySteward#readme",
   "dependencies": {
-    "alexa-sdk": "^1.0.6"
+    "alexa-sdk": "^1.0.7",
+    "dynasty": "^0.2.7"
   }
 }
