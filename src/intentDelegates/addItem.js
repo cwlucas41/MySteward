@@ -11,6 +11,12 @@ module.exports = function(handler, table) {
     if (slots.Item && slots.Item.value) {
         record.itemName = slots.Item.value.toLowerCase();
 
+        if (slots.Quantity && slots.Quantity.value) {
+            record.quantity = slots.Quantity.value;
+        } else {
+            record.quantity = 1;
+        }
+
         table
         .insert(record)
         .then(function(resp) {
