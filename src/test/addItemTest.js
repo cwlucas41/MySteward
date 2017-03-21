@@ -1,4 +1,5 @@
 const expect = require('chai').expect;
+const assert = require('chai').assert;
 const index = require('../index');
 const languageStrings = require('../languageStrings')
 const ssmlWrap = require('./resources/ssmlWrap')
@@ -154,6 +155,15 @@ describe("Testing AddItem intent", function() {
         it("should end the alexa session", function() {
             expect(speechResponse.response.shouldEndSession).not.to.be.null
             expect(speechResponse.response.shouldEndSession).to.be.true
+        })
+
+        it("should not have inserted to the database", function() {
+            return stewardItems.find({hash: "test", range: "eggs"})
+            .then(function(resp) {
+                expect(resp).to.be.undefined
+            }).catch(function(err) {
+                assert.fail()
+            })
         })
     })
 })
