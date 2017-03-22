@@ -82,7 +82,7 @@ describe("Testing AddItem intent", function() {
         })
 
         it("should have inserted to the database with quantity of one", function() {
-            return stewardItems.find({hash: "test", range: "eggs"})
+            return stewardItems.find({hash: testUserId, range: testItemName})
             .then(function(resp) {
                 expect(resp.quantity).to.be.equal(1)
             }).catch(function(err) {
@@ -99,7 +99,7 @@ describe("Testing AddItem intent", function() {
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
             input.request.intent.slots.Item.value = testItemName
-            input.request.intent.slots.Quantity.value = 5
+            input.request.intent.slots.Quantity.value = testQuantity
             deleteTestItemThen(executeSkill, input, ctx, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
@@ -123,7 +123,7 @@ describe("Testing AddItem intent", function() {
         it("should have inserted to the database with quantity of input", function() {
             return stewardItems.find({hash: "test", range: "eggs"})
             .then(function(resp) {
-                expect(resp.quantity).to.be.equal(5)
+                expect(resp.quantity).to.be.equal(testQuantity)
             }).catch(function(err) {
                 assert.fail()
             })
