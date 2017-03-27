@@ -1,10 +1,11 @@
+'use strict';
+
 const expect = require('chai').expect;
 const assert = require('chai').assert;
-const index = require('../index');
 const languageStrings = require('../languageStrings')
 const ssmlWrap = require('./resources/ssmlWrap')
+const executor = require('./resources/alexaExecutor')
 const dynasty = require('dynasty')({});
-const context = require('aws-lambda-mock-context');
 
 const strings = languageStrings.strings.en.translation
 const stewardItems = dynasty.table('Steward_Items');
@@ -36,32 +37,24 @@ const blankInput =
     "version": "1.0"
 }
 
-function deleteTestItemThen(then, input, ctx, callback) {
+function deleteTestItemThenExecute(input, callback) {
     stewardItems
     .remove({hash: testUserId, range: testItemName})
     .then((resp) => {
-        then(input, ctx, callback)
+        executor(input, callback)
     }).catch(err => { callback(err,null) })
-}
-
-function executeSkill(input, ctx, callback) {
-    index.handler(input, ctx)
-    ctx.Promise
-    .then(resp => { callback(null, resp) })
-    .catch(err => { callback(err, null) })
 }
 
 describe("Testing AddItem intent", function() {
 
     describe("valid intput without quantity", function() {
-        const ctx = context();
         var speechResponse = null
         var speechError = null
 
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
             input.request.intent.slots.Item.value = testItemName
-            deleteTestItemThen(executeSkill, input, ctx, function(err, resp) {
+            deleteTestItemThenExecute(input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
                 done()
@@ -92,7 +85,6 @@ describe("Testing AddItem intent", function() {
     })
 
     describe("valid intput with quantity", function() {
-        const ctx = context();
         var speechResponse = null
         var speechError = null
 
@@ -100,7 +92,7 @@ describe("Testing AddItem intent", function() {
             var input = JSON.parse(JSON.stringify(blankInput))
             input.request.intent.slots.Item.value = testItemName
             input.request.intent.slots.Quantity.value = testQuantity
-            deleteTestItemThen(executeSkill, input, ctx, function(err, resp) {
+            deleteTestItemThenExecute(input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
                 done()
@@ -131,13 +123,12 @@ describe("Testing AddItem intent", function() {
     })
 
     describe("invalid intput", function() {
-        const ctx = context();
         var speechResponse = null
         var speechError = null
 
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
-            deleteTestItemThen(executeSkill, input, ctx, function(err, resp) {
+            deleteTestItemThenExecute(input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
                 done()
