@@ -67,7 +67,7 @@ describe("Testing QueryItem intent", function() {
         })
 
         it("should have an answer with quantity", function() {
-            var expected = sprintf(strings.QUANTITY_NONZERO, currentQuantity.toString(), testItemName.toString())
+            var expected = sprintf(strings.QUANTITY_NONZERO, currentQuantity, testItemName.toString())
             expect(speechResponse.response.outputSpeech.ssml).to.be.string(ssmlWrap(expected))
         })
 
@@ -127,7 +127,7 @@ describe("Testing QueryItem intent", function() {
         })
 
         it("should have an answer with quantity", function() {
-            var expected = sprintf(strings.QUANTITY_NONZERO, currentQuantity.toString(), testItemName.toString())
+            var expected = sprintf(strings.QUANTITY_NONZERO, currentQuantity, testItemName.toString())
             expect(speechResponse.response.outputSpeech.ssml).to.be.string(ssmlWrap(expected))
         })
 
