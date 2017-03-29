@@ -9,8 +9,9 @@ module.exports = function(handler, table) {
             .find({ hash: handler.event.session.user.userId,
                     range: slots.Item.value
                     })
-            .then(function(amount) {
-                if (amount != 0) {
+            .then(function(resp) {
+                amount = resp.quantity
+                if (resp != 0) {
                     handler.emit(':tell', handler.t('QUANTITY_ZERO', amount.toString()));
                 }
                 else {
