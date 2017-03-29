@@ -46,7 +46,7 @@ function deleteTestItemThenExecute(input, callback) {
 
 function insertTestItemThenExecute(input, callback) {
     stewardItems
-    .remove({hash: testUserId, range: testItemName})
+    .insert({userId: testUserId, itemName: testItemName})
     .then((resp) => {
         executor(input, callback)
     }).catch(err => { callback(err,null) })
