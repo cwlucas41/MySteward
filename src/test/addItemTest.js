@@ -84,7 +84,7 @@ describe("Testing AddItem intent", function() {
         })
     })
 
-    describe("valid intput with quantity", function() {
+    describe("valid input with quantity", function() {
         var speechResponse = null
         var speechError = null
 
@@ -122,7 +122,7 @@ describe("Testing AddItem intent", function() {
         })
     })
 
-    describe("invalid intput", function() {
+    describe("invalid input", function() {
         var speechResponse = null
         var speechError = null
 
