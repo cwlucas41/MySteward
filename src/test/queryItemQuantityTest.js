@@ -145,13 +145,14 @@ describe("Testing QueryItem intent", function() {
         })
     })
 
-    describe("valid input with no item", function() {
+    describe("valid input with no item in table", function() {
         var speechResponse = null
         var speechError = null
         var currentQuantity = 0;
 
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
+            input.request.intent.slots.Item.value = testItemName
             deleteTestItemThenExecute(input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }

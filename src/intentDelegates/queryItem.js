@@ -20,7 +20,7 @@ module.exports = function(handler, table) {
             })
             .catch(function(err) {
                 console.log(err);
-                handler.emit('ERROR');
+                handler.emit('Error');
             });
 
     } else {
