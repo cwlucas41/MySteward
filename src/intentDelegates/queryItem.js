@@ -10,7 +10,7 @@ module.exports = function(handler, table) {
                     range: slots.Item.value
                     })
             .then(function(resp) {
-                var amount = resp.quantity
+                var amount = resp.quantity.value
                 if (resp != 0) {
                     handler.emit(':tell', handler.t('QUANTITY_ZERO', amount.toString()));
                 }
