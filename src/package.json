@@ -23,6 +23,7 @@
   "devDependencies": {
     "aws-lambda-mock-context": "^3.0.1",
     "chai": "^3.5.0",
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "sprintf-js": "^1.0.3"
   }
 }
