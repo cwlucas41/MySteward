@@ -2,15 +2,13 @@
 
 module.exports = function(handler, table) {
 
-    var record = {
-        userId: handler.event.session.user.userId,
-    }
-
     const slots = handler.event.request.intent.slots
 
     if (slots.Item && slots.Item.value) {
         table
-            .find({itemName: record})
+            .find({ userId: handler.event.session.user.userId,
+                    itemName: record
+                    })
             .then(function(amount) {
                 if (amount != 0) {
                     handler.emit(':tell', this.t('QUANTITY_ZERO', amount.toString()));
