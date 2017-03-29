@@ -37,9 +37,17 @@ const blankInput =
     "version": "1.0"
 }
 
-function deleteTestItemThenExecute(input, amount, callback) {
+function insertTestItemThenExecute(input, amount, callback) {
     stewardItems
     .insert({userId: testUserId, itemName: testItemName, quantity: amount})
+    .then((resp) => {
+        executor(input, callback)
+    }).catch(err => { callback(err,null) })
+}
+
+function deleteTestItemThenExecute(input, callback) {
+    stewardItems
+    .remove({hash: testUserId, range: testItemName})
     .then((resp) => {
         executor(input, callback)
     }).catch(err => { callback(err,null) })
@@ -55,7 +63,7 @@ describe("Testing QueryItem intent", function() {
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
             input.request.intent.slots.Item.value = testItemName
-            deleteTestItemThenExecute(input, currentQuantity, function(err, resp) {
+            insertTestItemThenExecute(input, currentQuantity, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
                 done()
@@ -85,7 +93,7 @@ describe("Testing QueryItem intent", function() {
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
             input.request.intent.slots.Item.value = testItemName
-            deleteTestItemThenExecute(input, currentQuantity, function(err, resp) {
+            insertTestItemThenExecute(input, currentQuantity, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
                 done()
@@ -115,7 +123,7 @@ describe("Testing QueryItem intent", function() {
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
             input.request.intent.slots.Item.value = testItemName
-            deleteTestItemThenExecute(input, currentQuantity, function(err, resp) {
+            insertTestItemThenExecute(input, currentQuantity, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
                 done()
@@ -137,6 +145,35 @@ describe("Testing QueryItem intent", function() {
         })
     })
 
+    describe("valid input with no item", function() {
+        var speechResponse = null
+        var speechError = null
+        var currentQuantity = 0;
+
+        before(function(done){
+            var input = JSON.parse(JSON.stringify(blankInput))
+            deleteTestItemThenExecute(input, function(err, resp) {
+                if (err) { console.log(err); speechError = err}
+                else { speechResponse = resp }
+                done()
+            })
+        })
+
+        it('should not have errored',function() {
+            expect(speechError).to.be.null
+        })
+
+        it("should have a regular message with quantity 0", function() {
+          var expected = sprintf(strings.QUANTITY_ZERO, testItemName)
+          expect(speechResponse.response.outputSpeech.ssml).to.be.string(ssmlWrap(expected
+        })
+
+        it("should end the alexa session", function() {
+            expect(speechResponse.response.shouldEndSession).not.to.be.null
+            expect(speechResponse.response.shouldEndSession).to.be.true
+        })
+    })
+
     describe("invalid input - no item", function() {
         var speechResponse = null
         var speechError = null
@@ -144,7 +181,7 @@ describe("Testing QueryItem intent", function() {
 
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
-            deleteTestItemThenExecute(input, currentQuantity, function(err, resp) {
+            insertTestItemThenExecute(input, currentQuantity, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
                 done()

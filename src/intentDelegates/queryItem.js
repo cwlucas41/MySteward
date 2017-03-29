@@ -9,13 +9,13 @@ module.exports = function(handler, table) {
             .find({ hash: handler.event.session.user.userId,
                     range: slots.Item.value
                     })
-            .then(function(resp) { //TODO: handle undefined resp
+            .then(function(resp) {
                 var amount = resp.quantity
-                if (amount != 0) {
+                if (resp != undefined && amount != 0) {
                   handler.emit(':tell', handler.t('QUANTITY_NONZERO', amount, slots.Item.value.toLowerCase()));
                 }
                 else {
-                    handler.emit(':tell', handler.t('QUANTITY_ZERO', slots.Item.value.toLowerCase()));
+                  handler.emit(':tell', handler.t('QUANTITY_ZERO', slots.Item.value.toLowerCase()));
                 }
             })
             .catch(function(err) {
