@@ -6,6 +6,7 @@ const languageStrings = require('../languageStrings')
 const ssmlWrap = require('./resources/ssmlWrap')
 const executor = require('./resources/alexaExecutor')
 const dynasty = require('dynasty')({});
+const sprintf = require("sprintf-js").sprintf
 
 const strings = languageStrings.strings.en.translation
 const stewardItems = dynasty.table('Steward_Items');
