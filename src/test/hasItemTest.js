@@ -6,6 +6,7 @@ const languageStrings = require('../languageStrings')
 const ssmlWrap = require('./resources/ssmlWrap')
 const executor = require('./resources/alexaExecutor')
 const dynasty = require('dynasty')({});
+const sprintf = require('sprintf-js');
 
 const strings = languageStrings.strings.en.translation
 const stewardItems = dynasty.table('Steward_Items');
@@ -78,7 +79,8 @@ describe("Testing HasItem intent", function() {
         })
 
         it("should have an HASITEM_MESSAGE", function() {
-            expect(speechResponse.response.outputSpeech.ssml).to.be.string(ssmlWrap(strings.HASITEM_MESSAGE))
+			const expected = sprintf(strings.HASITEM_MESSAGE, testItemName)
+            expect(speechResponse.response.outputSpeech.ssml).to.be.string(ssmlWrap(expected))
         })
 
         it("should end the alexa session", function() {
@@ -106,7 +108,8 @@ describe("Testing HasItem intent", function() {
         })
 
         it("should have an NOITEM_MESSAGE", function() {
-            expect(speechResponse.response.outputSpeech.ssml).to.be.string(ssmlWrap(strings.NOITEM_MESSAGE))
+			const expected = sprintf(strings.HASITEM_MESSAGE, testItemName)
+            expect(speechResponse.response.outputSpeech.ssml).to.be.string(ssmlWrap(expected))
         })
 
         it("should end the alexa session", function() {
