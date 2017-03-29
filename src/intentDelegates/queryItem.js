@@ -11,10 +11,10 @@ module.exports = function(handler, table) {
                     })
             .then(function(amount) {
                 if (amount != 0) {
-                    handler.emit(':tell', this.t('QUANTITY_ZERO', amount.toString()));
+                    handler.emit(':tell', handler.t('QUANTITY_ZERO', amount.toString()));
                 }
                 else {
-                    handler.emit(':tell', this.t('QUANTITY_NONZERO', amount.toString(), slots.Item.value.toLowerCase()));
+                    handler.emit(':tell', handler.t('QUANTITY_NONZERO', amount.toString(), slots.Item.value.toLowerCase()));
                 }
             })
             .catch(function(err) {
