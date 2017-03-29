@@ -4,6 +4,8 @@ const Alexa = require('alexa-sdk');
 const dynasty = require('dynasty')({});
 const languageStrings = require('./languageStrings');
 const addItem = require('./intentDelegates/addItem');
+const queryItem = require('./intentDelegates/queryItem');
+const hasItem = require('./intentDelegates/hasItem');
 const removeItem = require('./intentDelegates/removeItem');
 
 const APP_ID = "amzn1.ask.skill.8371afd6-d231-4b54-bf1d-5987733228cd";
@@ -13,7 +15,11 @@ const handlers = {
 
     'AddItem': function() { addItem(this, stewardItems) },
 
+	'HasItem': function() {hasItem(this, stewardItems) },
+
     'RemoveItem': function() { removeItem(this, stewardItems) },
+
+    'QueryItem': function() { queryItem(this, stewardItems) },
 
     'Affirmative': function() {
         const responses = this.t('AFFIRMATIVE_MESSAGE');

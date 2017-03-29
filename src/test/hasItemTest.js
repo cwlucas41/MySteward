@@ -6,6 +6,7 @@ const languageStrings = require('../languageStrings')
 const ssmlWrap = require('./resources/ssmlWrap')
 const executor = require('./resources/alexaExecutor')
 const dynasty = require('dynasty')({});
+const sprintf = require('sprintf-js').sprintf;
 
 const strings = languageStrings.strings.en.translation
 const stewardItems = dynasty.table('Steward_Items');
@@ -27,10 +28,9 @@ const blankInput =
         "type": "IntentRequest",
         "locale": "en-US",
         "intent": {
-            "name": "AddItem",
+            "name": "HasItem",
             "slots": {
                 "Item": {"name": "Item"},
-                "Quantity": {"name": "Quantity"}
             }
         }
     },
@@ -45,9 +45,51 @@ function deleteTestItemThenExecute(input, callback) {
     }).catch(err => { callback(err,null) })
 }
 
-describe("Testing AddItem intent", function() {
+function insertTestItemThenExecute(input, callback) {
+    stewardItems
+    .insert({userId: testUserId, itemName: testItemName})
+    .then((resp) => {
+        executor(input, callback)
+    }).catch(err => { callback(err,null) })
+}
 
-    describe("valid intput without quantity", function() {
+//Test Cases
+//1.) Have item and item is there
+//2.) Have item and item isn't there
+//3.) Item name value isn't set
+
+describe("Testing HasItem intent", function() {
+
+    describe("valid intput and item is available", function() {
+        var speechResponse = null
+        var speechError = null
+
+        before(function(done){
+            var input = JSON.parse(JSON.stringify(blankInput))
+            input.request.intent.slots.Item.value = testItemName
+            insertTestItemThenExecute(input, function(err, resp) {
+                if (err) { console.log(err); speechError = err}
+                else { speechResponse = resp }
+                done()
+            })
+        })
+
+        it('should not have errored',function() {
+            expect(speechError).to.be.null
+        })
+
+        it("should have an HASITEM_MESSAGE", function() {
+			const expected = sprintf(strings.HASITEM_MESSAGE, testItemName)
+            expect(speechResponse.response.outputSpeech.ssml).to.be.string(ssmlWrap(expected))
+        })
+
+        it("should end the alexa session", function() {
+            expect(speechResponse.response.shouldEndSession).not.to.be.null
+            expect(speechResponse.response.shouldEndSession).to.be.true
+        })
+    })
+
+    describe("valid intput and item isn't available", function() {
         var speechResponse = null
         var speechError = null
 
@@ -65,64 +107,18 @@ describe("Testing AddItem intent", function() {
             expect(speechError).to.be.null
         })
 
-        it("should have an affirmative message", function() {
-            expect(speechResponse.response.outputSpeech.ssml).to.be.oneOf(strings.AFFIRMATIVE_MESSAGE.map(ssmlWrap))
+        it("should have an NOITEM_MESSAGE", function() {
+			const expected = sprintf(strings.NOITEM_MESSAGE, testItemName)
+            expect(speechResponse.response.outputSpeech.ssml).to.be.string(ssmlWrap(expected))
         })
 
         it("should end the alexa session", function() {
             expect(speechResponse.response.shouldEndSession).not.to.be.null
             expect(speechResponse.response.shouldEndSession).to.be.true
         })
-
-        it("should have inserted to the database with quantity of one", function() {
-            return stewardItems.find({hash: testUserId, range: testItemName})
-            .then(function(resp) {
-                expect(resp.quantity).to.be.equal(1)
-            }).catch(function(err) {
-                assert.fail()
-            })
-        })
     })
 
-    describe("valid input with quantity", function() {
-        var speechResponse = null
-        var speechError = null
-
-        before(function(done){
-            var input = JSON.parse(JSON.stringify(blankInput))
-            input.request.intent.slots.Item.value = testItemName
-            input.request.intent.slots.Quantity.value = testQuantity
-            deleteTestItemThenExecute(input, function(err, resp) {
-                if (err) { console.log(err); speechError = err}
-                else { speechResponse = resp }
-                done()
-            })
-        })
-
-        it('should not have errored',function() {
-            expect(speechError).to.be.null
-        })
-
-        it("should have an affirmative message", function() {
-            expect(speechResponse.response.outputSpeech.ssml).to.be.oneOf(strings.AFFIRMATIVE_MESSAGE.map(ssmlWrap))
-        })
-
-        it("should end the alexa session", function() {
-            expect(speechResponse.response.shouldEndSession).not.to.be.null
-            expect(speechResponse.response.shouldEndSession).to.be.true
-        })
-
-        it("should have inserted to the database with quantity of input", function() {
-            return stewardItems.find({hash: "test", range: "eggs"})
-            .then(function(resp) {
-                expect(resp.quantity).to.be.equal(testQuantity)
-            }).catch(function(err) {
-                assert.fail()
-            })
-        })
-    })
-
-    describe("invalid input", function() {
+    describe("invalid intput", function() {
         var speechResponse = null
         var speechError = null
 
@@ -146,15 +142,6 @@ describe("Testing AddItem intent", function() {
         it("should end the alexa session", function() {
             expect(speechResponse.response.shouldEndSession).not.to.be.null
             expect(speechResponse.response.shouldEndSession).to.be.true
-        })
-
-        it("should not have inserted to the database", function() {
-            return stewardItems.find({hash: "test", range: "eggs"})
-            .then(function(resp) {
-                expect(resp).to.be.undefined
-            }).catch(function(err) {
-                assert.fail()
-            })
-        })
-    })
+        }) 
+    }) 
 })
