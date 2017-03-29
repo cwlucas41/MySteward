@@ -7,7 +7,7 @@ module.exports = function(handler, table) {
     if (slots.Item && slots.Item.value) {
         table
             .find({ hash: handler.event.session.user.userId,
-                    range: record
+                    range: slots.Item.value
                     })
             .then(function(amount) {
                 if (amount != 0) {
