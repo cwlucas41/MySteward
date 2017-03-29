@@ -9,6 +9,8 @@ module.exports = {
                 HELP_MESSAGE: "You can ask questions such as, I bought a dozen eggs, or, you can say exit...Now, what can I help you with?",
                 HELP_REPROMT: "You can say things like, I bought a dozen eggs, or you can say exit...Now, what can I help you with?",
                 STOP_MESSAGE: 'Goodbye!',
+                QUANTITY_ZERO: 'You don\'t have any %s.',
+                QUANTITY_NONZERO: 'You have %d %s.',
             },
         }
     }
