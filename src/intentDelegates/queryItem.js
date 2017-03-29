@@ -10,9 +10,8 @@ module.exports = function(handler, table) {
                     range: slots.Item.value
                     })
             .then(function(resp) {
-                var amount = resp.quantity
-                if (resp != undefined && amount != 0) {
-                  handler.emit(':tell', handler.t('QUANTITY_NONZERO', amount, slots.Item.value.toLowerCase()));
+                if (resp != undefined && resp.quantity != 0) {
+                  handler.emit(':tell', handler.t('QUANTITY_NONZERO', resp.quantity, slots.Item.value.toLowerCase()));
                 }
                 else {
                   handler.emit(':tell', handler.t('QUANTITY_ZERO', slots.Item.value.toLowerCase()));
