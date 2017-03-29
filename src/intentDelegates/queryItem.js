@@ -9,13 +9,15 @@ module.exports = function(handler, table) {
     const slots = handler.event.request.intent.slots
 
     if (slots.Item && slots.Item.value) {
-        record.itemName = slots.Item.value.toLowerCase();
-
-        var answer = table.find(record);
-
-        answer
+        table
+            .find({itemName: record})
             .then(function(amount) {
-                handler.emit(answer.toString());
+                if (amount != 0) {
+                    handler.emit(':tell', this.t('QUANTITY_ZERO', amount.toString()));
+                }
+                else {
+                    handler.emit(':tell', this.t('QUANTITY_NONZERO', amount.toString(), slots.Item.value.toLowerCase()));
+                }
             })
             .catch(function(err) {
                 console.log(err);
