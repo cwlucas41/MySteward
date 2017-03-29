@@ -10,10 +10,8 @@ module.exports = function(handler, table) {
                     range: slots.Item.value
                     })
             .then(function(resp) { //TODO: handle undefined resp
-                console.log(resp)
-                console.log(resp.quantity)
-                console.log(resp.quantity.value)
-                if (resp != 0) {
+                var amount = resp.quantity
+                if (amount != 0) {
                     handler.emit(':tell', handler.t('QUANTITY_ZERO', amount.toString()));
                 }
                 else {
