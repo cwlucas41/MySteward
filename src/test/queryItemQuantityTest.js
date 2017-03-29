@@ -165,7 +165,7 @@ describe("Testing QueryItem intent", function() {
 
         it("should have a regular message with quantity 0", function() {
           var expected = sprintf(strings.QUANTITY_ZERO, testItemName)
-          expect(speechResponse.response.outputSpeech.ssml).to.be.string(ssmlWrap(expected
+          expect(speechResponse.response.outputSpeech.ssml).to.be.string(ssmlWrap(expected))
         })
 
         it("should end the alexa session", function() {
