@@ -38,7 +38,7 @@ const blankInput =
 
 function deleteTestItemThenExecute(input, amount, callback) {
     stewardItems
-    .insert({user: testUserId, item: testItemName, quantity: amount})
+    .insert({userId: testUserId, itemName: testItemName, quantity: amount})
     .then((resp) => {
         executor(input, callback)
     }).catch(err => { callback(err,null) })
@@ -72,15 +72,6 @@ describe("Testing QueryItem intent", function() {
         it("should end the alexa session", function() {
             expect(speechResponse.response.shouldEndSession).not.to.be.null
             expect(speechResponse.response.shouldEndSession).to.be.true
-        })
-
-        it("should have inserted to the database with quantity of one", function() {
-            return stewardItems.find({hash: testUserId, range: testItemName})
-            .then(function(resp) {
-                expect(resp.quantity).to.be.equal(1)
-            }).catch(function(err) {
-                assert.fail()
-            })
         })
     })
 
