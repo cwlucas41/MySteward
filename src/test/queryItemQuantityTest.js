@@ -66,8 +66,8 @@ describe("Testing QueryItem intent", function() {
         })
 
         it("should have an answer with quantity", function() {
-            var expected = strings.QUANTITY_NONZERO
-            expect(speechResponse.response.outputSpeech.ssml).to.be.string(ssml(expected))
+            var expected = sprintf(strings.QUANTITY_NONZERO, amount.toString(), testItemName)
+            expect(speechResponse.response.outputSpeech.ssml).to.be.string(ssmlWrap(expected))
         })
 
         it("should end the alexa session", function() {
@@ -96,7 +96,7 @@ describe("Testing QueryItem intent", function() {
         })
 
         it("should have an answer with quantity", function() {
-            var expected = strings.QUANTITY_ZERO
+            var expected = sprintf(strings.QUANTITY_ZERO, testItemName)
             expect(speechResponse.response.outputSpeech.ssml).to.be.string(ssmlWrap(expected))
         })
 
@@ -126,8 +126,8 @@ describe("Testing QueryItem intent", function() {
         })
 
         it("should have an answer with quantity", function() {
-            var expected = strings.QUANTITY_NONZERO
-            expect(speechResponse.response.outputSpeech.ssml).to.be.string(ssml(expected))
+            var expected = sprintf(strings.QUANTITY_NONZERO, amount.toString(), testItemName)
+            expect(speechResponse.response.outputSpeech.ssml).to.be.string(ssmlWrap(expected))
         })
 
         it("should end the alexa session", function() {
