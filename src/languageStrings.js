@@ -3,6 +3,8 @@ module.exports = {
         'en': {
             translation: {
                 AFFIRMATIVE_MESSAGE: ["Done", "Noted", "I\'ll remember that."],
+				HASITEM_MESSAGE: "You have a %s"
+				NOITEM_MESSAGE: "You do not have a %s"
                 ERROR_MESSAGE: "There was a problem, please try again later",
                 HELP_MESSAGE: "You can ask questions such as, I bought a dozen eggs, or, you can say exit...Now, what can I help you with?",
                 HELP_REPROMT: "You can say things like, I bought a dozen eggs, or you can say exit...Now, what can I help you with?",

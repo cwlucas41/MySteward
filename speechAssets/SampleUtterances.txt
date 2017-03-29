@@ -3,3 +3,7 @@ AddItem I have a {Item}
 AddItem I have an {Item}
 AddItem I bought a {Item}
 AddItem I bought an {Item}
+HasItem Do I have a {Item}
+HasItem Do I have an {Item}
+HasItem Tell me if I have a {Item}
+HasItem Tell me if I have an {Item}
