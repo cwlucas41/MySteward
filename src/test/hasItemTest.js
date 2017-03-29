@@ -108,7 +108,7 @@ describe("Testing HasItem intent", function() {
         })
 
         it("should have an NOITEM_MESSAGE", function() {
-			const expected = sprintf(strings.HASITEM_MESSAGE, testItemName)
+			const expected = sprintf(strings.NOITEM_MESSAGE, testItemName)
             expect(speechResponse.response.outputSpeech.ssml).to.be.string(ssmlWrap(expected))
         })
 
