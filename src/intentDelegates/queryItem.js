@@ -9,8 +9,10 @@ module.exports = function(handler, table) {
             .find({ hash: handler.event.session.user.userId,
                     range: slots.Item.value
                     })
-            .then(function(resp) {
-                var amount = resp.quantity.value
+            .then(function(resp) { //TODO: handle undefined resp
+                console.log(resp)
+                console.log(resp.quantity)
+                console.log(resp.quantity.value)
                 if (resp != 0) {
                     handler.emit(':tell', handler.t('QUANTITY_ZERO', amount.toString()));
                 }
