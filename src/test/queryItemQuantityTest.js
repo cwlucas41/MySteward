@@ -66,7 +66,8 @@ describe("Testing QueryItem intent", function() {
         })
 
         it("should have an answer with quantity", function() {
-            expect(speechResponse.response.outputSpeech.ssml).to.be.strings.QUANTITY_NONZERO
+            var expected = strings.QUANTITY_NONZERO
+            expect(speechResponse.response.outputSpeech.ssml).to.be.expected
         })
 
         it("should end the alexa session", function() {
