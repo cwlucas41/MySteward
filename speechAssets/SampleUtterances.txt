@@ -3,3 +3,11 @@ AddItem I have a {Item}
 AddItem I have an {Item}
 AddItem I bought a {Item}
 AddItem I bought an {Item}
+
+RemoveItem Remove {Item}
+RemoveItem I’m out of {Item}
+RemoveItem I am out of {Item}
+RemoveItem I ran out of {Item}
+RemoveItem There is no {Item} left
+RemoveItem There are no {Item} left.
+RemoveItem I don’t have any {Item}
