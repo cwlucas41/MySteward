@@ -3,8 +3,9 @@ AddItem I have a {Item}
 AddItem I have an {Item}
 AddItem I bought a {Item}
 AddItem I bought an {Item}
-AddItem add {Quantity} of {Item}
-AddItem I have {Quantity} of {Item}
-AddItem I have {Quantity} {Item}
-AddItem I bought {Quantity} of {Item}
-AddItem I bought {Quantity} {Item}
+QueryItem How many {Item} do I have?
+QueryItem How much {Item} do I have?
+QueryItem Do I have any {Item}?
+QueryItem Do I have {Item}?
+QueryItem Are any {Item} left?
+QueryItem Am I out of {Item}?
