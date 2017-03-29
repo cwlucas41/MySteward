@@ -96,7 +96,7 @@ describe("Testing QueryItem intent", function() {
         })
 
         it("should have an answer with quantity", function() {
-            var expected = strings.QUANTITY_NONZERO
+            var expected = strings.QUANTITY_ZERO
             expect(speechResponse.response.outputSpeech.ssml).to.be.expected
         })
 
@@ -136,13 +136,14 @@ describe("Testing QueryItem intent", function() {
         })
     })
 
-    /*describe("invalid input", function() {
+    describe("invalid input - no item", function() {
         var speechResponse = null
         var speechError = null
+        var currentQuantity = 0;
 
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
-            deleteTestItemThenExecute(input, function(err, resp) {
+            deleteTestItemThenExecute(input, currentQuantity, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
                 done()
@@ -161,14 +162,5 @@ describe("Testing QueryItem intent", function() {
             expect(speechResponse.response.shouldEndSession).not.to.be.null
             expect(speechResponse.response.shouldEndSession).to.be.true
         })
-
-        it("should not have inserted to the database", function() {
-            return stewardItems.find({hash: "test", range: "eggs"})
-            .then(function(resp) {
-                expect(resp).to.be.undefined
-            }).catch(function(err) {
-                assert.fail()
-            })
-        })
-    })*/
+    })
 })
