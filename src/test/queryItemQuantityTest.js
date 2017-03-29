@@ -76,14 +76,15 @@ describe("Testing QueryItem intent", function() {
         })
     })
 
-    /*describe("valid input with quantity", function() {
+    describe("valid input with quantity of 0", function() {
         var speechResponse = null
         var speechError = null
+        var currentQuantity = 0
 
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
             input.request.intent.slots.Item.value = testItemName
-            deleteTestItemThenExecute(input, function(err, resp) {
+            deleteTestItemThenExecute(input, currentQuantity, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
                 done()
@@ -94,24 +95,46 @@ describe("Testing QueryItem intent", function() {
             expect(speechError).to.be.null
         })
 
-        it("should have an affirmative message", function() {
-            expect(speechResponse.response.outputSpeech.ssml).to.be.oneOf(strings.AFFIRMATIVE_MESSAGE.map(ssmlWrap))
+        it("should have an answer with quantity", function() {
+            var expected = strings.QUANTITY_NONZERO
+            expect(speechResponse.response.outputSpeech.ssml).to.be.expected
         })
 
         it("should end the alexa session", function() {
             expect(speechResponse.response.shouldEndSession).not.to.be.null
             expect(speechResponse.response.shouldEndSession).to.be.true
         })
+    })
 
-        it("should have inserted to the database with quantity of input", function() {
-            return stewardItems.find({hash: "test", range: "eggs"})
-            .then(function(resp) {
-                expect(resp.quantity).to.be.equal(testQuantity)
-            }).catch(function(err) {
-                assert.fail()
+    describe("valid input with quantity of random", function() {
+        var speechResponse = null
+        var speechError = null
+        var currentQuantity = Math.floor((Math.random() * (100 - 2)) + 2);
+
+        before(function(done){
+            var input = JSON.parse(JSON.stringify(blankInput))
+            input.request.intent.slots.Item.value = testItemName
+            deleteTestItemThenExecute(input, currentQuantity, function(err, resp) {
+                if (err) { console.log(err); speechError = err}
+                else { speechResponse = resp }
+                done()
             })
         })
-    })*/
+
+        it('should not have errored',function() {
+            expect(speechError).to.be.null
+        })
+
+        it("should have an answer with quantity", function() {
+            var expected = strings.QUANTITY_NONZERO
+            expect(speechResponse.response.outputSpeech.ssml).to.be.expected
+        })
+
+        it("should end the alexa session", function() {
+            expect(speechResponse.response.shouldEndSession).not.to.be.null
+            expect(speechResponse.response.shouldEndSession).to.be.true
+        })
+    })
 
     /*describe("invalid input", function() {
         var speechResponse = null
