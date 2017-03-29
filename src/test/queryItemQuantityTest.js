@@ -66,7 +66,7 @@ describe("Testing QueryItem intent", function() {
         })
 
         it("should have an answer with quantity", function() {
-            expect(speechResponse.response.outputSpeech.ssml).to.be.oneOf(strings.AFFIRMATIVE_MESSAGE.map(ssmlWrap))
+            expect(speechResponse.response.outputSpeech.ssml).to.be.(strings.QUANTITY_NONZERO)
         })
 
         it("should end the alexa session", function() {
@@ -75,14 +75,13 @@ describe("Testing QueryItem intent", function() {
         })
     })
 
-    describe("valid input with quantity", function() {
+    /*describe("valid input with quantity", function() {
         var speechResponse = null
         var speechError = null
 
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
             input.request.intent.slots.Item.value = testItemName
-            input.request.intent.slots.Quantity.value = testQuantity
             deleteTestItemThenExecute(input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
@@ -111,7 +110,7 @@ describe("Testing QueryItem intent", function() {
                 assert.fail()
             })
         })
-    })
+    })*/
 
     /*describe("invalid input", function() {
         var speechResponse = null
