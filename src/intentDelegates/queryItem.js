@@ -12,10 +12,10 @@ module.exports = function(handler, table) {
             .then(function(resp) { //TODO: handle undefined resp
                 var amount = resp.quantity
                 if (amount != 0) {
-                    handler.emit(':tell', handler.t('QUANTITY_ZERO', amount.toString()));
+                  handler.emit(':tell', handler.t('QUANTITY_NONZERO', amount.toString(), slots.Item.value.toLowerCase()));
                 }
                 else {
-                    handler.emit(':tell', handler.t('QUANTITY_NONZERO', amount.toString(), slots.Item.value.toLowerCase()));
+                    handler.emit(':tell', handler.t('QUANTITY_ZERO', slots.Item.value.toLowerCase()));
                 }
             })
             .catch(function(err) {
