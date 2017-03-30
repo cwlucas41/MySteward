@@ -37,27 +37,6 @@ const blankInput =
     "version": "1.0"
 }
 
-function deleteTestItemThenExecute(input, callback) {
-    stewardItems
-    .remove({hash: testUserId, range: testItemName})
-    .then((resp) => {
-        executor(input, callback)
-    }).catch(err => { callback(err,null) })
-}
-
-function insertTestItemThenExecute(input, callback) {
-    stewardItems
-    .insert({userId: testUserId, itemName: testItemName})
-    .then((resp) => {
-        executor(input, callback)
-    }).catch(err => { callback(err,null) })
-}
-
-//Test Cases
-//1.) Have item and item is there
-//2.) Have item and item isn't there
-//3.) Item name value isn't set
-
 describe("Testing HasItem intent", function() {
 
     describe("valid intput and item is available", function() {
@@ -67,7 +46,8 @@ describe("Testing HasItem intent", function() {
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
             input.request.intent.slots.Item.value = testItemName
-            insertTestItemThenExecute(input, function(err, resp) {
+            const testItem = {userId: testUserId, itemName: testItemName};
+            executor.insertItemThenExecute(stewardItems, testItem, input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
                 done()
@@ -96,7 +76,8 @@ describe("Testing HasItem intent", function() {
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
             input.request.intent.slots.Item.value = testItemName
-            deleteTestItemThenExecute(input, function(err, resp) {
+            const testItem = {hash: testUserId, range: testItemName};
+            executor.deleteItemThenExecute(stewardItems, testItem, input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
                 done()
@@ -124,7 +105,8 @@ describe("Testing HasItem intent", function() {
 
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
-            deleteTestItemThenExecute(input, function(err, resp) {
+            const testItem = {hash: testUserId, range: testItemName};
+            executor.deleteItemThenExecute(stewardItems, testItem, input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
                 done()
@@ -142,6 +124,6 @@ describe("Testing HasItem intent", function() {
         it("should end the alexa session", function() {
             expect(speechResponse.response.shouldEndSession).not.to.be.null
             expect(speechResponse.response.shouldEndSession).to.be.true
-        }) 
-    }) 
+        })
+    })
 })

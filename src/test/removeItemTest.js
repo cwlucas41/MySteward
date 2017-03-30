@@ -36,22 +36,6 @@ const blankInput =
     "version": "1.0"
 }
 
-function insertTestItemThenExecute(input, callback) {
-    stewardItems
-    .insert({userId: testUserId, itemName: testItemName})
-    .then((resp) => {
-        executor(input, callback)
-    }).catch(err => { callback(err,null) })
-}
-
-function deleteTestItemThenExecute(input, callback) {
-    stewardItems
-    .remove({hash: testUserId, range: testItemName})
-    .then((resp) => {
-        executor(input, callback)
-    }).catch(err => { callback(err,null) })
-}
-
 describe("Testing RemoveItem intent", function() {
     //no user id
 
@@ -62,7 +46,8 @@ describe("Testing RemoveItem intent", function() {
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
             input.request.intent.slots.Item.value = testItemName
-            insertTestItemThenExecute(input, function(err, resp) {
+            const testItem = {userId: testUserId, itemName: testItemName};
+            executor.insertItemThenExecute(stewardItems, testItem, input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
                 done()
@@ -99,7 +84,8 @@ describe("Testing RemoveItem intent", function() {
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
             input.request.intent.slots.Item.value = testItemName
-            deleteTestItemThenExecute(input, function(err, resp) {
+            const testItem = {hash: testUserId, range: testItemName};
+            executor.deleteItemThenExecute(stewardItems, testItem, input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
                 done()
@@ -126,7 +112,8 @@ describe("Testing RemoveItem intent", function() {
 
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
-            insertTestItemThenExecute(input, function(err, resp) {
+            const testItem = {userId: testUserId, itemName: testItemName};
+            executor.insertItemThenExecute(stewardItems, testItem, input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
                 done()
