@@ -37,22 +37,6 @@ const blankInput =
     "version": "1.0"
 }
 
-function insertTestItemThenExecute(input, amount, callback) {
-    stewardItems
-    .insert({userId: testUserId, itemName: testItemName, quantity: amount})
-    .then((resp) => {
-        executor(input, callback)
-    }).catch(err => { callback(err,null) })
-}
-
-function deleteTestItemThenExecute(input, callback) {
-    stewardItems
-    .remove({hash: testUserId, range: testItemName})
-    .then((resp) => {
-        executor(input, callback)
-    }).catch(err => { callback(err,null) })
-}
-
 describe("Testing QueryItem intent", function() {
 
     describe("valid input with quantity of 1", function() {
@@ -63,7 +47,8 @@ describe("Testing QueryItem intent", function() {
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
             input.request.intent.slots.Item.value = testItemName
-            insertTestItemThenExecute(input, currentQuantity, function(err, resp) {
+            const testItem = {userId: testUserId, itemName: testItemName, quantity: currentQuantity};
+            executor.insertItemThenExecute(stewardItems, testItem, input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
                 done()
@@ -93,7 +78,8 @@ describe("Testing QueryItem intent", function() {
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
             input.request.intent.slots.Item.value = testItemName
-            insertTestItemThenExecute(input, currentQuantity, function(err, resp) {
+            const testItem = {userId: testUserId, itemName: testItemName, quantity: currentQuantity};
+            executor.insertItemThenExecute(stewardItems, testItem, input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
                 done()
@@ -123,7 +109,8 @@ describe("Testing QueryItem intent", function() {
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
             input.request.intent.slots.Item.value = testItemName
-            insertTestItemThenExecute(input, currentQuantity, function(err, resp) {
+            const testItem = {userId: testUserId, itemName: testItemName, quantity: currentQuantity};
+            executor.insertItemThenExecute(stewardItems, testItem, input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
                 done()
@@ -153,7 +140,8 @@ describe("Testing QueryItem intent", function() {
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
             input.request.intent.slots.Item.value = testItemName
-            deleteTestItemThenExecute(input, function(err, resp) {
+            const testItem = {hash: testUserId, range: testItemName};
+            executor.deleteItemThenExecute(stewardItems, testItem, input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
                 done()
@@ -182,7 +170,8 @@ describe("Testing QueryItem intent", function() {
 
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
-            insertTestItemThenExecute(input, currentQuantity, function(err, resp) {
+            const testItem = {userId: testUserId, itemName: testItemName, quantity: currentQuantity};
+            executor.insertItemThenExecute(stewardItems, testItem, input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
                 done()
