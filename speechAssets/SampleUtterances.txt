@@ -16,6 +16,7 @@ QueryItem Are there any {Item} left
 QueryItem Do I have a {Item}
 QueryItem Do I have an {Item}
 QueryItem Am I out of {Item}
+QueryItem Is there any {Item} left
 QueryItem Tell me if I have a {Item}
 QueryItem Tell me if I have an {Item}
 
