@@ -3,19 +3,27 @@ AddItem I have a {Item}
 AddItem I have an {Item}
 AddItem I bought a {Item}
 AddItem I bought an {Item}
-QueryItem How many {Item} do I have?
-QueryItem How much {Item} do I have?
-QueryItem Do I have any {Item}?
-QueryItem Do I have {Item}?
-QueryItem Are any {Item} left?
-HasItem Do I have a {Item}
-HasItem Do I have an {Item}
-HasItem Tell me if I have a {Item}
-HasItem Tell me if I have an {Item}
+
+QueryItem How many {Item} do I have
+QueryItem How much {Item} do I have
+QueryItem How much {Item} do I have left
+QueryItem Do I have any {Item}
+QueryItem Do I have any of my {Item} left
+QueryItem Do I have any {Item} left
+QueryItem Do I have {Item}
+QueryItem Are any {Item} left
+QueryItem Are there any {Item} left
+QueryItem Do I have a {Item}
+QueryItem Do I have an {Item}
+QueryItem Am I out of {Item}
+QueryItem Is there any {Item} left
+QueryItem Tell me if I have a {Item}
+QueryItem Tell me if I have an {Item}
+
 RemoveItem Remove {Item}
-RemoveItem I’m out of {Item}
+RemoveItem Remove my {Item}
 RemoveItem I am out of {Item}
 RemoveItem I ran out of {Item}
 RemoveItem There is no {Item} left
 RemoveItem There are no {Item} left
-RemoveItem I don’t have any {Item}
+RemoveItem I do not have any {Item}

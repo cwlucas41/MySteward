@@ -1,14 +1,5 @@
 {"intents": [
     {
-        "intent": "HasItem",
-        "slots": [
-            {
-                "name" : "Item",
-                "type": "LIST_OF_ITEMS"
-            }
-        ]
-    },
-    {
         "intent": "AddItem",
         "slots": [
             {
@@ -29,8 +20,7 @@
       		      "type": "LIST_OF_ITEMS"
       	    }
       	]
-    }
-
+    },
     {
         "intent": "RemoveItem",
         "slots": [
@@ -40,7 +30,6 @@
             }
         ]
     },
-
     {"intent": "AMAZON.RepeatIntent"},
     {"intent": "AMAZON.HelpIntent"},
     {"intent": "AMAZON.StopIntent"},

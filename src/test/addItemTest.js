@@ -37,14 +37,6 @@ const blankInput =
     "version": "1.0"
 }
 
-function deleteTestItemThenExecute(input, callback) {
-    stewardItems
-    .remove({hash: testUserId, range: testItemName})
-    .then((resp) => {
-        executor(input, callback)
-    }).catch(err => { callback(err,null) })
-}
-
 describe("Testing AddItem intent", function() {
 
     describe("valid intput without quantity", function() {
@@ -54,7 +46,8 @@ describe("Testing AddItem intent", function() {
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
             input.request.intent.slots.Item.value = testItemName
-            deleteTestItemThenExecute(input, function(err, resp) {
+            const testItem = {hash: testUserId, range: testItemName};
+            executor.deleteItemThenExecute(stewardItems, testItem, input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
                 done()
@@ -92,7 +85,8 @@ describe("Testing AddItem intent", function() {
             var input = JSON.parse(JSON.stringify(blankInput))
             input.request.intent.slots.Item.value = testItemName
             input.request.intent.slots.Quantity.value = testQuantity
-            deleteTestItemThenExecute(input, function(err, resp) {
+            const testItem = {hash: testUserId, range: testItemName};
+            executor.deleteItemThenExecute(stewardItems, testItem, input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
                 done()
@@ -128,7 +122,8 @@ describe("Testing AddItem intent", function() {
 
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
-            deleteTestItemThenExecute(input, function(err, resp) {
+            const testItem = {hash: testUserId, range: testItemName};
+            executor.deleteItemThenExecute(stewardItems, testItem, input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
                 done()
