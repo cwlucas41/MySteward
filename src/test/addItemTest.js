@@ -42,6 +42,7 @@ describe("Testing AddItem intent", function() {
     describe("valid intput without quantity", function() {
         var speechResponse = null
         var speechError = null
+        var insertedItem = null
 
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
@@ -67,19 +68,29 @@ describe("Testing AddItem intent", function() {
             expect(speechResponse.response.shouldEndSession).to.be.true
         })
 
-        it("should have inserted to the database with quantity of one", function() {
+        it("should have inserted an item", function() {
             return stewardItems.find({hash: testUserId, range: testItemName})
             .then(function(resp) {
-                expect(resp.quantity).to.be.equal(1)
+                insertedItem = resp
             }).catch(function(err) {
                 assert.fail()
             })
         })
+
+        it("inserted item should have quantity of 1", function() {
+            expect(insertedItem.quantity).to.be.equal(1)
+        })
+
+        it("inserted item shoudl have creation timestamp", function() {
+            expect(insertedItem.createTime).not.to.be.null
+        })
+
     })
 
     describe("valid input with quantity", function() {
         var speechResponse = null
         var speechError = null
+        var insertedItem = null
 
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
@@ -106,13 +117,21 @@ describe("Testing AddItem intent", function() {
             expect(speechResponse.response.shouldEndSession).to.be.true
         })
 
-        it("should have inserted to the database with quantity of input", function() {
-            return stewardItems.find({hash: "test", range: "eggs"})
+        it("should have inserted an item", function() {
+            return stewardItems.find({hash: testUserId, range: testItemName})
             .then(function(resp) {
-                expect(resp.quantity).to.be.equal(testQuantity)
+                insertedItem = resp
             }).catch(function(err) {
                 assert.fail()
             })
+        })
+
+        it("inserted item should have quantity of testQuantity", function() {
+            expect(insertedItem.quantity).to.be.equal(testQuantity)
+        })
+
+        it("inserted item shoudl have creation timestamp", function() {
+            expect(insertedItem.createTime).not.to.be.null
         })
     })
 
