@@ -22,7 +22,20 @@
       	]
     },
     {
-      	"intent": "UpdateQuantity",
+      	"intent": "IncrementQuantity",
+      	"slots": [
+      	    {
+      		      "name": "Item",
+      		      "type": "LIST_OF_ITEMS"
+      	    }
+            {
+                "name": "Quantity",
+                "type": "AMAZON.NUMBER"
+            }
+      	]
+    },
+    {
+      	"intent": "DecrementQuantity",
       	"slots": [
       	    {
       		      "name": "Item",
