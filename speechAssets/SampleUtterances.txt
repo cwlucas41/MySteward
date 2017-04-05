@@ -31,8 +31,12 @@ RemoveItem There is no {Item} left
 RemoveItem There are no {Item} left
 RemoveItem I do not have any {Item}
 
-UpdateQuantity I just got {Quantity} {Item}
-UpdateQuantity I bought {Quantity} {Item}
-UpdateQuantity I bought an {Item}
-UpdateQuantity I bought a {Item}
-UpdateQuantity Add {Quantity} {Item}
+IncrementQuantity I just got {Quantity} {Item}
+IncrementQuantity I bought {Quantity} {Item}
+IncrementQuantity I bought an {Item}
+IncrementQuantity I bought a {Item}
+IncrementQuantity Add {Quantity} {Item}
+
+RemoveQuantity Remove {Quantity} {Item}
+RemoveQuantity I lost {Quantity} {Item}
+RemoveQuantity I used {Quantity} {Item}

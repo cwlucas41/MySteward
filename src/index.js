@@ -18,6 +18,10 @@ const handlers = {
 
     'QueryItem': function() { queryItem(this, stewardItems) },
 
+    'IncrementQuantity': function() { incrementQuantity(this, stewardItems) },
+
+    'DecrementQuantity': function() { decrementQuantity(this, stewardItems) },
+
     'Affirmative': function() {
         const responses = this.t('AFFIRMATIVE_MESSAGE');
         const idx = Math.floor(Math.random() * responses.length);

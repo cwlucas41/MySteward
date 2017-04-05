@@ -1,5 +1,7 @@
 'use strict';
 
+const createItem = require('./../helperDelegates/createItem');
+
 module.exports = function(handler, table) {
 
     var record = {
