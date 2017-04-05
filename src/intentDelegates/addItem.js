@@ -4,6 +4,7 @@ module.exports = function(handler, table) {
 
     var record = {
         userId: handler.event.session.user.userId,
+        createTime: Math.floor(Date.now() / 1000)
     }
 
     const slots = handler.event.request.intent.slots
