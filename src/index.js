@@ -15,8 +15,6 @@ const handlers = {
 
     'AddItem': function() { addItem(this, stewardItems) },
 
-	'HasItem': function() {hasItem(this, stewardItems) },
-
     'RemoveItem': function() { removeItem(this, stewardItems) },
 
     'QueryItem': function() { queryItem(this, stewardItems) },

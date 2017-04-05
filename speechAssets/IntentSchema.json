@@ -1,14 +1,5 @@
 {"intents": [
     {
-        "intent": "HasItem",
-        "slots": [
-            {
-                "name" : "Item",
-                "type": "LIST_OF_ITEMS"
-            }
-        ]
-    },
-    {
         "intent": "AddItem",
         "slots": [
             {
