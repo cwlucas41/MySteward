@@ -99,6 +99,36 @@ describe("Testing QueryLocation intent", function() {
         })
     })
 
+    describe("valid input with no existing item", function() {
+        var speechResponse = null
+        var speechError = null
+
+        before(function(done){
+            var input = JSON.parse(JSON.stringify(blankInput))
+            input.request.intent.slots.Item.value = testItemName
+            const testItem = {hash: testUserId, range: testItemName};
+            executor.deleteItemThenExecute(stewardItems, testItem, input, function(err, resp) {
+                if (err) { console.log(err); speechError = err}
+                else { speechResponse = resp }
+                done()
+            })
+        })
+
+        it('should not have errored',function() {
+            expect(speechError).to.be.null
+        })
+
+        it("should have an answer with quantity", function() {
+            var expected = sprintf(strings.NO_LOCATION_MESSAGE)
+            expect(speechResponse.response.outputSpeech.ssml).to.be.string(ssmlWrap(expected))
+        })
+
+        it("should end the alexa session", function() {
+            expect(speechResponse.response.shouldEndSession).not.to.be.null
+            expect(speechResponse.response.shouldEndSession).to.be.true
+        })
+    })
+
     describe("invalid input - no item", function() {
         var speechResponse = null
         var speechError = null
