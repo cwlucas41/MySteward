@@ -27,3 +27,10 @@ RemoveItem I ran out of {Item}
 RemoveItem There is no {Item} left
 RemoveItem There are no {Item} left
 RemoveItem I do not have any {Item}
+
+QueryLocation Where is the {Item}
+QueryLocation Where is my {Item}
+QueryLocation Where are the {Item}
+QueryLocation Where are my {Item}
+QueryLocation Where did I put my {Item}
+QueryLocation Where did I put the {Item}
