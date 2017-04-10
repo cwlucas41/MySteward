@@ -4,10 +4,6 @@ const removeItem = require('./removeItem');
 
 module.exports = function(handler, table) {
 
-    var record = {
-        userId: handler.event.session.user.userId,
-    }
-
     const slots = handler.event.request.intent.slots
     var baseQuantity = 1;
     var removedQuantity = 1;
@@ -39,7 +35,7 @@ module.exports = function(handler, table) {
           removeItem(handler, table);
         } else {
           table
-          .update(slots.Item.value.toLowerCase(), { quanity: finalQuantity })
+          .update(slots.Item.value.toLowerCase(), { quantity: finalQuantity })
           .then(function(resp) {
               handler.emit('Affirmative');
           })

@@ -4,12 +4,9 @@ const createItem = require('./../helperDelegates/createItem');
 
 module.exports = function(handler, table) {
 
-    var record = {
-        userId: handler.event.session.user.userId,
-    }
-
     const slots = handler.event.request.intent.slots
     var setQuantity = 1;
+    var skip = false;
 
     if (slots.Item && slots.Item.value) {
         table
@@ -19,21 +16,24 @@ module.exports = function(handler, table) {
         .then(function(resp) {
             if (resp != undefined) {
               createItem(handler, table);
+              skip = true;
             }
         })
 
-      if (slots.Quantity && slots.Quantity.value) {
-        setQuantity = slots.Quantity.value;
+      if (!skip) {
+        if (slots.Quantity && slots.Quantity.value) {
+          setQuantity = slots.Quantity.value;
+        }
+        table
+        .update(slots.Item.value.toLowerCase(), { quantity: setQuantity })
+        .then(function(resp) {
+            handler.emit('Affirmative');
+        })
+        .catch(function(err) {
+            console.log(err);
+            handler.emit('Error');
+        });
       }
-      table
-      .update(slots.Item.value.toLowerCase(), { quantity: setQuantity })
-      .then(function(resp) {
-          handler.emit('Affirmative');
-      })
-      .catch(function(err) {
-          console.log(err);
-          handler.emit('Error');
-      });
 
     } else {
         console.log("error with itemName slot");
