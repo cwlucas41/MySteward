@@ -37,6 +37,6 @@ IncrementQuantity I bought an {Item}
 IncrementQuantity I bought a {Item}
 IncrementQuantity Add {Quantity} {Item}
 
-RemoveQuantity Remove {Quantity} {Item}
-RemoveQuantity I lost {Quantity} {Item}
-RemoveQuantity I used {Quantity} {Item}
+DecrementQuantity Remove {Quantity} {Item}
+DecrementQuantity I lost {Quantity} {Item}
+DecrementQuantity I used {Quantity} {Item}
