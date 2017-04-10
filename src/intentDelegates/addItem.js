@@ -25,7 +25,7 @@ module.exports = function(handler, table) {
           setQuantity = slots.Quantity.value;
         }
         table
-        .update(slots.Item.value.toLowerCase(), { quantity: setQuantity })
+        .update({hash: handler.event.session.use.userId, range: slots.Item.value.toLowerCase()}, { quantity: setQuantity })
         .then(function(resp) {
             handler.emit('Affirmative');
         })

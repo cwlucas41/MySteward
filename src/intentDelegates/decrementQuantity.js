@@ -35,7 +35,7 @@ module.exports = function(handler, table) {
           removeItem(handler, table);
         } else {
           table
-          .update(slots.Item.value.toLowerCase(), { quantity: finalQuantity })
+          .update({hash: handler.event.session.use.userId, range: slots.Item.value.toLowerCase()}, { quantity: finalQuantity })
           .then(function(resp) {
               handler.emit('Affirmative');
           })

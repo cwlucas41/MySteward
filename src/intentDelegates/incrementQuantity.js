@@ -4,10 +4,6 @@ const createItem = require('./../helperDelegates/createItem');
 
 module.exports = function(handler, table) {
 
-    var record = {
-        userId: handler.event.session.user.userId,
-    }
-
     const slots = handler.event.request.intent.slots
     var baseQuantity = 1;
     var addedQuantity = 1;
@@ -31,7 +27,7 @@ module.exports = function(handler, table) {
         addedQuantity = slots.Quantity.value;
       }
       table
-      .update(slots.Item.value.toLowerCase(), { quanity: baseQuantity + addedQuantity })
+      .update({hash: handler.event.session.use.userId, range: slots.Item.value.toLowerCase()}, { quantity: baseQuantity + addedQuantity })
       .then(function(resp) {
           handler.emit('Affirmative');
       })
