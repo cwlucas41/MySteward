@@ -13,7 +13,7 @@ module.exports = function(handler, table) {
 
     if (slots.Item && slots.Item.value)
         table
-        .find({ hash: handler.event.session.user.userId
+        .find({ hash: handler.event.session.user.userId,
                 range: slot.Item.value
                 })
         .then(function(resp) {
@@ -28,7 +28,7 @@ module.exports = function(handler, table) {
         setQuantity = slots.Quantity.value;
       }
       table
-      .update(slots.Item.value.toLowerCase(), { quanity: setQuantity })
+      .update(slots.Item.value.toLowerCase(), { quantity: setQuantity })
       .then(function(resp) {
           handler.emit('Affirmative');
       })
