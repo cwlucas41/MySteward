@@ -37,24 +37,18 @@ const blankInput =
     "version": "1.0"
 }
 
-function deleteTestItemThenExecute(input, callback) {
-    stewardItems
-    .remove({hash: testUserId, range: testItemName})
-    .then((resp) => {
-        executor(input, callback)
-    }).catch(err => { callback(err,null) })
-}
-
 describe("Testing AddItem intent", function() {
 
     describe("valid intput without quantity", function() {
         var speechResponse = null
         var speechError = null
+        var insertedItem = null
 
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
             input.request.intent.slots.Item.value = testItemName
-            deleteTestItemThenExecute(input, function(err, resp) {
+            const testItem = {hash: testUserId, range: testItemName};
+            executor.deleteItemThenExecute(stewardItems, testItem, input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
                 done()
@@ -74,25 +68,36 @@ describe("Testing AddItem intent", function() {
             expect(speechResponse.response.shouldEndSession).to.be.true
         })
 
-        it("should have inserted to the database with quantity of one", function() {
+        it("should have inserted an item", function() {
             return stewardItems.find({hash: testUserId, range: testItemName})
             .then(function(resp) {
-                expect(resp.quantity).to.be.equal(1)
+                insertedItem = resp
             }).catch(function(err) {
                 assert.fail()
             })
         })
+
+        it("inserted item should have quantity of 1", function() {
+            expect(insertedItem.quantity).to.be.equal(1)
+        })
+
+        it("inserted item shoudl have creation timestamp", function() {
+            expect(insertedItem.createTime).not.to.be.null
+        })
+
     })
 
-    describe("valid intput with quantity", function() {
+    describe("valid input with quantity", function() {
         var speechResponse = null
         var speechError = null
+        var insertedItem = null
 
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
             input.request.intent.slots.Item.value = testItemName
             input.request.intent.slots.Quantity.value = testQuantity
-            deleteTestItemThenExecute(input, function(err, resp) {
+            const testItem = {hash: testUserId, range: testItemName};
+            executor.deleteItemThenExecute(stewardItems, testItem, input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
                 done()
@@ -112,23 +117,32 @@ describe("Testing AddItem intent", function() {
             expect(speechResponse.response.shouldEndSession).to.be.true
         })
 
-        it("should have inserted to the database with quantity of input", function() {
-            return stewardItems.find({hash: "test", range: "eggs"})
+        it("should have inserted an item", function() {
+            return stewardItems.find({hash: testUserId, range: testItemName})
             .then(function(resp) {
-                expect(resp.quantity).to.be.equal(testQuantity)
+                insertedItem = resp
             }).catch(function(err) {
                 assert.fail()
             })
         })
+
+        it("inserted item should have quantity of testQuantity", function() {
+            expect(insertedItem.quantity).to.be.equal(testQuantity)
+        })
+
+        it("inserted item shoudl have creation timestamp", function() {
+            expect(insertedItem.createTime).not.to.be.null
+        })
     })
 
-    describe("invalid intput", function() {
+    describe("invalid input", function() {
         var speechResponse = null
         var speechError = null
 
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
-            deleteTestItemThenExecute(input, function(err, resp) {
+            const testItem = {hash: testUserId, range: testItemName};
+            executor.deleteItemThenExecute(stewardItems, testItem, input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
                 done()
