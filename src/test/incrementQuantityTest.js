@@ -47,7 +47,7 @@ describe("Testing IncrementQuantity intent", function() {
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
             input.request.intent.slots.Item.value = testItemName
-            const testItem = {hash: testUserId, range: testItemName, quantity: testQuantity};
+            const testItem = {hash: testUserId, range: testItemName};
             executor.insertItemThenExecute(stewardItems, testItem, input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }

@@ -10,7 +10,7 @@ module.exports = function(handler, table) {
 
     if (slots.Item && slots.Item.value)
         table
-        .find({ hash: handler.event.session.user.userId
+        .find({ hash: handler.event.session.user.userId,
                 range: slots.Item.value
                 })
         .then(function(resp) {
