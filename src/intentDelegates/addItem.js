@@ -11,7 +11,7 @@ module.exports = function(handler, table) {
     const slots = handler.event.request.intent.slots
     var setQuantity = 1;
 
-    if (slots.Item && slots.Item.value)
+    if (slots.Item && slots.Item.value) {
         table
         .find({ hash: handler.event.session.user.userId,
                 range: slot.Item.value
