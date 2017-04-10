@@ -8,7 +8,7 @@ module.exports = function(handler, table) {
     var baseQuantity = 1;
     var addedQuantity = 1;
 
-    if (slots.Item && slots.Item.value)
+    if (slots.Item && slots.Item.value) {
         table
         .find({ hash: handler.event.session.user.userId,
                 range: slots.Item.value
@@ -26,8 +26,9 @@ module.exports = function(handler, table) {
       if (slots.Quantity && slots.Quantity.value) {
         addedQuantity = slots.Quantity.value;
       }
+      var total = baseQuantity + addedQuantity;
       table
-      .update({hash: handler.event.session.user.userId, range: slots.Item.value.toLowerCase()}, { quantity: baseQuantity + addedQuantity })
+      .update({hash: handler.event.session.user.userId, range: slots.Item.value.toLowerCase()}, { quantity: total })
       .then(function(resp) {
           handler.emit('Affirmative');
       })

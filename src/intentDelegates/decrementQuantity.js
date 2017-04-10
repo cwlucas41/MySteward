@@ -9,7 +9,7 @@ module.exports = function(handler, table) {
     var removedQuantity = 1;
     var skip = false;
 
-    if (slots.Item && slots.Item.value)
+    if (slots.Item && slots.Item.value) {
         table
         .find({ hash: handler.event.session.user.userId,
                 range: slots.Item.value
