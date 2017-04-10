@@ -135,7 +135,6 @@ describe("Testing QueryItem intent", function() {
     describe("valid input with item with no quantity", function() {
         var speechResponse = null
         var speechError = null
-        var currentQuantity = Math.floor((Math.random() * (100 - 2)) + 2);
 
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
