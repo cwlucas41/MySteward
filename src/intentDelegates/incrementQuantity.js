@@ -27,7 +27,7 @@ module.exports = function(handler, table) {
         addedQuantity = slots.Quantity.value;
       }
       table
-      .update({hash: handler.event.session.use.userId, range: slots.Item.value.toLowerCase()}, { quantity: baseQuantity + addedQuantity })
+      .update({hash: handler.event.session.user.userId, range: slots.Item.value.toLowerCase()}, { quantity: baseQuantity + addedQuantity })
       .then(function(resp) {
           handler.emit('Affirmative');
       })
