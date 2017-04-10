@@ -13,7 +13,7 @@ const stewardItems = dynasty.table('Steward_Items');
 
 const testUserId = 'test'
 const testItemName = 'eggs'
-const testQuantity = 5
+const testLocation = 'in the refrigerator'
 
 const blankInput =
 {
@@ -28,7 +28,7 @@ const blankInput =
         "type": "IntentRequest",
         "locale": "en-US",
         "intent": {
-            "name": "QueryItem",
+            "name": "QueryLocation",
             "slots": {
                 "Item": {"name": "Item"}
             }
@@ -37,17 +37,16 @@ const blankInput =
     "version": "1.0"
 }
 
-describe("Testing QueryItem intent", function() {
+describe("Testing QueryLocation intent", function() {
 
-    describe("valid input with quantity of 1", function() {
+    describe("valid input with existing item and location", function() {
         var speechResponse = null
         var speechError = null
-        var currentQuantity = 1
 
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
             input.request.intent.slots.Item.value = testItemName
-            const testItem = {userId: testUserId, itemName: testItemName, quantity: currentQuantity};
+            const testItem = {userId: testUserId, itemName: testItemName, location: testLocation};
             executor.insertItemThenExecute(stewardItems, testItem, input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
@@ -60,7 +59,7 @@ describe("Testing QueryItem intent", function() {
         })
 
         it("should have an answer with quantity", function() {
-            var expected = sprintf(strings.QUANTITY_NONZERO, currentQuantity, testItemName.toString())
+            var expected = sprintf(strings.LOCATION_MESSAGE, testLocation)
             expect(speechResponse.response.outputSpeech.ssml).to.be.string(ssmlWrap(expected))
         })
 
@@ -70,69 +69,7 @@ describe("Testing QueryItem intent", function() {
         })
     })
 
-    describe("valid input with quantity of 0", function() {
-        var speechResponse = null
-        var speechError = null
-        var currentQuantity = 0
-
-        before(function(done){
-            var input = JSON.parse(JSON.stringify(blankInput))
-            input.request.intent.slots.Item.value = testItemName
-            const testItem = {userId: testUserId, itemName: testItemName, quantity: currentQuantity};
-            executor.insertItemThenExecute(stewardItems, testItem, input, function(err, resp) {
-                if (err) { console.log(err); speechError = err}
-                else { speechResponse = resp }
-                done()
-            })
-        })
-
-        it('should not have errored',function() {
-            expect(speechError).to.be.null
-        })
-
-        it("should have an answer with quantity", function() {
-            var expected = sprintf(strings.QUANTITY_ZERO, testItemName)
-            expect(speechResponse.response.outputSpeech.ssml).to.be.string(ssmlWrap(expected))
-        })
-
-        it("should end the alexa session", function() {
-            expect(speechResponse.response.shouldEndSession).not.to.be.null
-            expect(speechResponse.response.shouldEndSession).to.be.true
-        })
-    })
-
-    describe("valid input with quantity of random", function() {
-        var speechResponse = null
-        var speechError = null
-        var currentQuantity = Math.floor((Math.random() * (100 - 2)) + 2);
-
-        before(function(done){
-            var input = JSON.parse(JSON.stringify(blankInput))
-            input.request.intent.slots.Item.value = testItemName
-            const testItem = {userId: testUserId, itemName: testItemName, quantity: currentQuantity};
-            executor.insertItemThenExecute(stewardItems, testItem, input, function(err, resp) {
-                if (err) { console.log(err); speechError = err}
-                else { speechResponse = resp }
-                done()
-            })
-        })
-
-        it('should not have errored',function() {
-            expect(speechError).to.be.null
-        })
-
-        it("should have an answer with quantity", function() {
-            var expected = sprintf(strings.QUANTITY_NONZERO, currentQuantity, testItemName.toString())
-            expect(speechResponse.response.outputSpeech.ssml).to.be.string(ssmlWrap(expected))
-        })
-
-        it("should end the alexa session", function() {
-            expect(speechResponse.response.shouldEndSession).not.to.be.null
-            expect(speechResponse.response.shouldEndSession).to.be.true
-        })
-    })
-
-    describe("valid input with item with no quantity", function() {
+    describe("valid input with existing item and no location", function() {
         var speechResponse = null
         var speechError = null
 
@@ -152,7 +89,7 @@ describe("Testing QueryItem intent", function() {
         })
 
         it("should have an answer with quantity", function() {
-            var expected = sprintf(strings.QUANTITY_ZERO, testItemName)
+            var expected = sprintf(strings.NO_LOCATION_MESSAGE)
             expect(speechResponse.response.outputSpeech.ssml).to.be.string(ssmlWrap(expected))
         })
 
@@ -162,10 +99,9 @@ describe("Testing QueryItem intent", function() {
         })
     })
 
-    describe("valid input with no item in table", function() {
+    describe("valid input with no existing item", function() {
         var speechResponse = null
         var speechError = null
-        var currentQuantity = 0;
 
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
@@ -182,8 +118,8 @@ describe("Testing QueryItem intent", function() {
             expect(speechError).to.be.null
         })
 
-        it("should have a regular message with quantity 0", function() {
-            var expected = sprintf(strings.QUANTITY_ZERO, testItemName)
+        it("should have an answer with quantity", function() {
+            var expected = sprintf(strings.NO_LOCATION_MESSAGE)
             expect(speechResponse.response.outputSpeech.ssml).to.be.string(ssmlWrap(expected))
         })
 
@@ -200,7 +136,7 @@ describe("Testing QueryItem intent", function() {
 
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
-            const testItem = {userId: testUserId, itemName: testItemName, quantity: currentQuantity};
+            const testItem = {userId: testUserId, itemName: testItemName};
             executor.insertItemThenExecute(stewardItems, testItem, input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
