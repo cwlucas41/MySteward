@@ -9,7 +9,7 @@ module.exports = function(handler, table) {
     }
 
     const slots = handler.event.request.intent.slots
-    var baseQuantity = 0;
+    var baseQuantity = 1;
     var addedQuantity = 1;
 
     if (slots.Item && slots.Item.value)
@@ -21,7 +21,9 @@ module.exports = function(handler, table) {
             if (resp != undefined) {
               createItem(handler, table);
             } else {
-              baseQuantity = resp.quantity;
+              if (resp.quantity != undefined) {
+                baseQuantity = resp.quantity;
+              }
             }
         })
 

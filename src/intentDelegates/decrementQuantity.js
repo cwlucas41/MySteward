@@ -9,7 +9,7 @@ module.exports = function(handler, table) {
     }
 
     const slots = handler.event.request.intent.slots
-    var baseQuantity = 0;
+    var baseQuantity = 1;
     var removedQuantity = 1;
     var skip = false;
 
@@ -23,7 +23,9 @@ module.exports = function(handler, table) {
               handler.emit(':tell', handler.t('QUANTITY_ZERO', slots.Item.value.toLowerCase()));
               skip = true
             } else {
-              baseQuantity = resp.quantity;
+              if (resp.quantity != undefined) {
+                baseQuantity = resp.quantity;
+              }
             }
         })
 

@@ -19,8 +19,6 @@ module.exports = function(handler, table) {
         .then(function(resp) {
             if (resp != undefined) {
               createItem(handler, table);
-            } else {
-              baseQuantity = resp.quantity;
             }
         })
 
