@@ -6,6 +6,7 @@ const languageStrings = require('../languageStrings')
 const ssmlWrap = require('./resources/ssmlWrap')
 const executor = require('./resources/alexaExecutor')
 const dynasty = require('dynasty')({});
+const sprintf = require("sprintf-js").sprintf
 
 const strings = languageStrings.strings.en.translation
 const stewardItems = dynasty.table('Steward_Items');
@@ -81,7 +82,7 @@ describe("Testing DecrementQuantity intent", function() {
           var randomQuant = Math.floor((Math.random() * (100 - 2)) + 2);
           input.request.intent.slots.Item.value = testItemName
           input.request.intent.slots.Quantity.value = randomQuant
-          const testItem = {userId: testUserId, itemName: testItemName};
+          const testItem = {userId: testUserId, itemName: testItemName, quantity: 1};
           executor.insertItemThenExecute(stewardItems, testItem, input, function(err, resp) {
               if (err) { console.log(err); speechError = err}
               else { speechResponse = resp }
