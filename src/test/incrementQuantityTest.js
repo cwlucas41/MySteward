@@ -47,7 +47,7 @@ describe("Testing IncrementQuantity intent", function() {
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
             input.request.intent.slots.Item.value = testItemName
-            const testItem = {hash: testUserId, range: testItemName};
+            const testItem = {userId: testUserId, itemName: testItemName};
             executor.insertItemThenExecute(stewardItems, testItem, input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
@@ -90,7 +90,7 @@ describe("Testing IncrementQuantity intent", function() {
             var randomQuant = Math.floor((Math.random() * (100 - 2)) + 2);
             input.request.intent.slots.Item.value = testItemName
             input.request.intent.slots.Quantity.value = randomQuant
-            const testItem = {hash: testUserId, range: testItemName, quantity: testQuantity};
+            const testItem = {userId: testUserId, itemName: testItemName};
             executor.insertItemThenExecute(stewardItems, testItem, input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
@@ -131,7 +131,7 @@ describe("Testing IncrementQuantity intent", function() {
             var input = JSON.parse(JSON.stringify(blankInput))
             input.request.intent.slots.Item.value = testItemName
             input.request.intent.slots.Quantity.value = 0
-            const testItem = {hash: testUserId, range: testItemName, quantity: testQuantity};
+            const testItem = {userId: testUserId, itemName: testItemName};
             executor.insertItemThenExecute(stewardItems, testItem, input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
@@ -169,7 +169,7 @@ describe("Testing IncrementQuantity intent", function() {
 
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
-            const testItem = {hash: testUserId, range: testItemName, quantity: testQuantity};
+            const testItem = {userId: testUserId, itemName: testItemName};
             executor.insertItemThenExecute(stewardItems, testItem, input, function(err, resp) {
                 if (err) { console.log(err); speechError = err}
                 else { speechResponse = resp }
