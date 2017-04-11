@@ -42,7 +42,7 @@ describe("Testing DecrementQuantity intent", function() {
   describe("valid input without quantity", function() {
       var speechResponse = null
       var speechError = null
-      var incrementedItem = null
+      var decrementedItem = null
 
       before(function(done){
           var input = JSON.parse(JSON.stringify(blankInput))
@@ -60,7 +60,8 @@ describe("Testing DecrementQuantity intent", function() {
       })
 
       it("should have a message saying there aren't any of the item to remove", function() {
-          expect(speechResponse.response.outputSpeech.ssml).to.be.oneOf(strings.QUANTITY_ZERO.map(ssmlWrap))
+        var expected = sprintf(strings.QUANTITY_ZERO, testItemName)
+        expect(speechResponse.response.outputSpeech.ssml).to.be.string(ssmlWrap(expected))
       })
 
       it("should end the alexa session", function() {
@@ -68,22 +69,12 @@ describe("Testing DecrementQuantity intent", function() {
           expect(speechResponse.response.shouldEndSession).to.be.true
       })
 
-      it("inserted item should have quantity decreased by 1", function() {
-          stewardItems.find({hash: testUserId, range: testItemName})
-          .then(function(resp) {
-              incrementedItem = resp
-          }).catch(function(err) {
-              assert.fail()
-          })
-          expect(incrementedItem.quantity).to.be.equal(testQuantity - 1)
-      })
-
   })
 
   describe("valid input with quantity > 1", function() {
       var speechResponse = null
       var speechError = null
-      var incrementedItem = null
+      var decrementedItem = null
 
       before(function(done){
           var input = JSON.parse(JSON.stringify(blankInput))
@@ -111,21 +102,20 @@ describe("Testing DecrementQuantity intent", function() {
           expect(speechResponse.response.shouldEndSession).to.be.true
       })
 
-      it("item should have quantity increased by testQuantity", function() {
+      it("item should have quantity decreased by testQuantity", function() {
           stewardItems.find({hash: testUserId, range: testItemName})
           .then(function(resp) {
-              incrementedItem = resp
+              decrementedItem = resp
           }).catch(function(err) {
               assert.fail()
           })
-          expect(incrementedItem.quantity).to.be.equal(testQuantity - randomQuant)
+          expect(decrementedItem.quantity).to.be.equal(testQuantity - randomQuant)
       })
   })
 
   describe("valid input with quantity equal to current database quantity (remove item)", function() {
       var speechResponse = null
       var speechError = null
-      var incrementedItem = null
 
       before(function(done){
           var input = JSON.parse(JSON.stringify(blankInput))
@@ -165,7 +155,6 @@ describe("Testing DecrementQuantity intent", function() {
   describe("valid input with quantity greater than current database quantity (remove item)", function() {
       var speechResponse = null
       var speechError = null
-      var incrementedItem = null
 
       before(function(done){
           var input = JSON.parse(JSON.stringify(blankInput))
@@ -205,7 +194,7 @@ describe("Testing DecrementQuantity intent", function() {
   describe("valid input with quantity 0", function() {
       var speechResponse = null
       var speechError = null
-      var incrementedItem = null
+      var decrementedItem = null
 
       before(function(done){
           var input = JSON.parse(JSON.stringify(blankInput))
@@ -235,11 +224,11 @@ describe("Testing DecrementQuantity intent", function() {
       it("item quantity should be unchanged", function() {
           stewardItems.find({hash: testUserId, range: testItemName})
           .then(function(resp) {
-              incrementedItem = resp
+              decrementedItem = resp
           }).catch(function(err) {
               assert.fail()
           })
-          expect(incrementedItem.quantity).to.be.equal(testQuantity)
+          expect(decrementedItem.quantity).to.be.equal(testQuantity)
       })
   })
 

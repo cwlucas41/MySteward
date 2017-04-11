@@ -71,11 +71,11 @@ describe("Testing IncrementQuantity intent", function() {
         it("inserted item should have quantity increased by 1", function() {
             stewardItems.find({hash: testUserId, range: testItemName})
             .then(function(resp) {
-                incrementedItem = resp
+                incrementedItem = resp.quantity
             }).catch(function(err) {
                 assert.fail()
             })
-            expect(incrementedItem.quantity).to.be.equal(testQuantity + 1)
+            expect(incrementedItem).to.be.equal(testQuantity + 1)
         })
 
     })
