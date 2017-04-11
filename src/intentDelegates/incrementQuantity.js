@@ -14,7 +14,7 @@ module.exports = function(handler, table) {
                 range: slots.Item.value
                 })
         .then(function(resp) {
-            if (resp != undefined) {
+            if (resp == undefined) {
               createItem(handler, table);
             } else {
               if (resp.quantity != undefined) {
