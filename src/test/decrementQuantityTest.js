@@ -62,7 +62,6 @@ describe("Testing DecrementQuantity intent", function() {
 
       it("should have a message saying there aren't any of the item to remove", function() {
         expect(speechResponse.response.outputSpeech.ssml).to.be.oneOf(strings.AFFIRMATIVE_MESSAGE.map(ssmlWrap))
-    })
       })
 
       it("should end the alexa session", function() {
