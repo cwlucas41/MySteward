@@ -1,8 +1,5 @@
-AddItem add {Item}
 AddItem I have a {Item}
 AddItem I have an {Item}
-AddItem I bought a {Item}
-AddItem I bought an {Item}
 AddItem I now have {Quantity} {Item}
 AddItem I am down to {Quantity} {Item}
 AddItem My number of {Item} is now {Quantity}
