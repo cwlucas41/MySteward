@@ -106,9 +106,10 @@ describe("Testing DecrementQuantity intent", function() {
           return stewardItems.find({hash: testUserId, range: testItemName})
           .then(function(resp) {
               expect(resp).not.to.be.null
-              expect(resp).not.to.be.undefineds
+              expect(resp).not.to.be.undefined
               expect(resp.quantity).to.be.equal(testQuantity - randomQuant)
           }).catch(function(err) {
+              console.log(err)
               assert.fail()
           })
       })
