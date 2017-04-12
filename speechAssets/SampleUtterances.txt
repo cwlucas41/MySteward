@@ -37,3 +37,10 @@ IncrementQuantity Add {Quantity} {Item}
 DecrementQuantity Remove {Quantity} {Item}
 DecrementQuantity I lost {Quantity} {Item}
 DecrementQuantity I used {Quantity} {Item}
+
+QueryLocation Where is the {Item}
+QueryLocation Where is my {Item}
+QueryLocation Where are the {Item}
+QueryLocation Where are my {Item}
+QueryLocation Where did I put my {Item}
+QueryLocation Where did I put the {Item}

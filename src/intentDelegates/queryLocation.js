@@ -10,11 +10,11 @@ module.exports = function(handler, table) {
                     range: slots.Item.value
                     })
             .then(function(resp) {
-                if (resp != undefined && resp.quantity != undefined && resp.quantity != 0) {
-                  handler.emit(':tell', handler.t('QUANTITY_NONZERO', resp.quantity, slots.Item.value.toLowerCase()));
+                if (resp != undefined && resp.location != undefined) {
+                  handler.emit(':tell', handler.t('LOCATION_MESSAGE', resp.location));
                 }
                 else {
-                  handler.emit(':tell', handler.t('QUANTITY_ZERO', slots.Item.value.toLowerCase()));
+                  handler.emit(':tell', handler.t('NO_LOCATION_MESSAGE'));
                 }
             })
             .catch(function(err) {

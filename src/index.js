@@ -6,8 +6,12 @@ const languageStrings = require('./languageStrings');
 const addItem = require('./intentDelegates/addItem');
 const queryItem = require('./intentDelegates/queryItem');
 const removeItem = require('./intentDelegates/removeItem');
+<<<<<<< HEAD
 const incrementQuantity = require('./intentDelegates/incrementQuantity')
 const decrementQuantity = require('./intentDelegates/decrementQuantity')
+=======
+const queryLocation = require('./intentDelegates/queryLocation');
+>>>>>>> ea92920ad18918bc08e63639e6be7ec304e5bdec
 
 const APP_ID = "amzn1.ask.skill.8371afd6-d231-4b54-bf1d-5987733228cd";
 const stewardItems = dynasty.table('Steward_Items');
@@ -23,6 +27,8 @@ const handlers = {
     'IncrementQuantity': function() { incrementQuantity(this, stewardItems) },
 
     'DecrementQuantity': function() { decrementQuantity(this, stewardItems) },
+
+    'QueryLocation': function() { queryLocation(this, stewardItems) },
 
     'Affirmative': function() {
         const responses = this.t('AFFIRMATIVE_MESSAGE');
