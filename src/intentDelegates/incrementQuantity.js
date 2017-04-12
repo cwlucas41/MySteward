@@ -26,7 +26,7 @@ module.exports = function(handler, table) {
       if (slots.Quantity && slots.Quantity.value) {
         addedQuantity = slots.Quantity.value;
       }
-      var total = baseQuantity + addedQuantity;
+      var total = eval(baseQuantity) + eval(addedQuantity);
       table
       .update({hash: handler.event.session.user.userId, range: slots.Item.value.toLowerCase()}, { quantity: total })
       .then(function(resp) {
