@@ -61,8 +61,8 @@ describe("Testing DecrementQuantity intent", function() {
       })
 
       it("should have a message saying there aren't any of the item to remove", function() {
-        var expected = sprintf(strings.QUANTITY_ZERO, testItemName)
-        expect(speechResponse.response.outputSpeech.ssml).to.be.string(ssmlWrap(expected))
+        expect(speechResponse.response.outputSpeech.ssml).to.be.oneOf(strings.AFFIRMATIVE_MESSAGE.map(ssmlWrap))
+    })
       })
 
       it("should end the alexa session", function() {
@@ -82,7 +82,7 @@ describe("Testing DecrementQuantity intent", function() {
           var randomQuant = Math.floor((Math.random() * (100 - 2)) + 2);
           input.request.intent.slots.Item.value = testItemName
           input.request.intent.slots.Quantity.value = randomQuant
-          const testItem = {userId: testUserId, itemName: testItemName, quantity: 1};
+          const testItem = {userId: testUserId, itemName: testItemName};
           executor.insertItemThenExecute(stewardItems, testItem, input, function(err, resp) {
               if (err) { console.log(err); speechError = err}
               else { speechResponse = resp }
