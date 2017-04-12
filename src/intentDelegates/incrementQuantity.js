@@ -28,7 +28,8 @@ module.exports = function(handler, table) {
       }
       var total = baseQuantity + addedQuantity;
       table
-      .update({hash: handler.event.session.user.userId, range: slots.Item.value.toLowerCase()}, { quantity: total })
+      //.update({hash: handler.event.session.user.userId, range: slots.Item.value.toLowerCase()}, { quantity: total })
+      .insert({userId: handler.event.session.user.userId, itemName: slots.Item.value.toLowerCase(), quantity: total})
       .then(function(resp) {
           handler.emit('Affirmative');
       })
