@@ -9,6 +9,8 @@ module.exports = {
                 STOP_MESSAGE: 'Goodbye!',
                 QUANTITY_ZERO: 'You don\'t have any %s.',
                 QUANTITY_NONZERO: 'You have %d %s.',
+				TIME_MESSAGE: 'You acquired %s on %s',
+				NOTIME_MESSAGE: "There wasn't a time attached to %s",
             },
         }
     }
