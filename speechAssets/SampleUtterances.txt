@@ -35,6 +35,7 @@ QueryLocation Where are my {Item}
 QueryLocation Where did I put my {Item}
 QueryLocation Where did I put the {Item}
 
+
 QueryCreateTime When did I get {Item}
 QueryCreateTime How many days ago did I get {Item}
 QueryCreateTime When did I get my {Item}
@@ -53,3 +54,12 @@ QueryCreateTime When did I purchase my {Item}
 QueryCreateTime How many days ago did I purchase my {Item}
 QueryCreateTime When did I purchase the {Item}
 QueryCreateTime How many days ago did I purchase the {Item}
+
+UpdateLocation I moved my {Item} to {Location}
+UpdateLocation I switched my {Item} to {Location}
+UpdateLocation The {Item} is now {Location}
+UpdateLocation Updated the location of {Item} to {Location}
+UpdateLocation Changed the location of {Item] to {Location}
+UpdateLocation Move {Item} to {Location}
+UpdateLocation Switch {Item} to {Location}
+
