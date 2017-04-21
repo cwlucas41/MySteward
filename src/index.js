@@ -7,6 +7,7 @@ const addItem = require('./intentDelegates/addItem');
 const queryItem = require('./intentDelegates/queryItem');
 const removeItem = require('./intentDelegates/removeItem');
 const queryCreateTime = require('./intentDelegates/queryCreateTime');
+const queryLocation = require('./intentDelegates/queryLocation');
 
 const APP_ID = "amzn1.ask.skill.8371afd6-d231-4b54-bf1d-5987733228cd";
 const stewardItems = dynasty.table('Steward_Items');
@@ -20,6 +21,8 @@ const handlers = {
     'QueryItem': function() { queryItem(this, stewardItems) },
 	
 	'QueryCreateTime' : function() { queryCreateTime(this, stewardItems) };
+
+    'QueryLocation': function() { queryLocation(this, stewardItems) },
 
     'Affirmative': function() {
         const responses = this.t('AFFIRMATIVE_MESSAGE');

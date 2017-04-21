@@ -22,6 +22,15 @@
       	]
     },
     {
+        "intent": "QueryLocation",
+        "slots": [
+            {
+                "name": "Item",
+                "type": "LIST_OF_ITEMS"
+            }
+        ]
+    }
+    {
         "intent": "RemoveItem",
         "slots": [
             {

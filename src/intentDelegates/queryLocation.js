@@ -10,17 +10,15 @@ module.exports = function(handler, table) {
                     range: slots.Item.value
                     })
             .then(function(resp) {
-                if (resp != undefined && resp.createTime != undefined) {
-					// rounding accounts for daylight savings
-					int timeDiff = round((Date.now() - Date(resp.createTime))/(1000*60*60*24))
-					handler.emit(':tell', handler.t('TIME_MESSAGE', slots.Item.value.toLowerCase(), timeDiff));
+                if (resp != undefined && resp.location != undefined) {
+                  handler.emit(':tell', handler.t('LOCATION_MESSAGE', resp.location));
                 }
                 else {
-					handler.emit(':tell', handler.t('NOTIME_MESSAGE', slots.Item.value.toLowerCase()));
+                  handler.emit(':tell', handler.t('NO_LOCATION_MESSAGE'));
                 }
             })
             .catch(function(err) {
-				console.log(err);
+                console.log(err);
                 handler.emit('Error');
             });
 
