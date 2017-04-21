@@ -233,7 +233,7 @@ describe("Testing DecrementQuantity intent", function() {
           })
       })
 
-      it("item should have quantity decreased by testQuantity", function() {
+      it("item should have quantity of testQuantity", function() {
           expect(decrementedItem.quantity).to.be.equal(testQuantity)
       })
   })
