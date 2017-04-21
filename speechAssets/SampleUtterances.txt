@@ -34,3 +34,22 @@ QueryLocation Where are the {Item}
 QueryLocation Where are my {Item}
 QueryLocation Where did I put my {Item}
 QueryLocation Where did I put the {Item}
+
+QueryCreateTime When did I get {Item}
+QueryCreateTime How many days ago did I get {Item}
+QueryCreateTime When did I get my {Item}
+QueryCreateTime How many days ago did I get my {Item}
+QueryCreateTime When did I get the {Item}
+QueryCreateTime How many days ago did I get the {Item}
+QueryCreateTime When did I buy {Item}
+QueryCreateTime How many days ago did I buy {Item}
+QueryCreateTime When did I buy my {Item}
+QueryCreateTime How many days ago did I buy my {Item}
+QueryCreateTime When did I buy the {Item}
+QueryCreateTime How many days ago did I buy the {Item}
+QueryCreateTime When did I purchase {Item}
+QueryCreateTime How many days ago did I purchase {Item}
+QueryCreateTime When did I purchase my {Item}
+QueryCreateTime How many days ago did I purchase my {Item}
+QueryCreateTime When did I purchase the {Item}
+QueryCreateTime How many days ago did I purchase the {Item}
