@@ -24,7 +24,7 @@ module.exports = function(handler, table) {
                 removedQuantity = slots.Quantity.value;
               }
               var finalQuantity = eval(baseQuantity) - eval(removedQuantity);
-              if (finalQuantity < 0) {
+              if (finalQuantity <= 0) {
                 removeItem(handler, table);
               } else {
                 table

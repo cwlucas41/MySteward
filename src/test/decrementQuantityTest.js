@@ -40,7 +40,7 @@ const blankInput =
 
 describe("Testing DecrementQuantity intent", function() {
 
-  describe("valid input without quantity", function() {
+  describe("valid input without quantity", function() { //Remove this, useless considering Sample Utterances format
       var speechResponse = null
       var speechError = null
       var decrementedItem = null
@@ -226,6 +226,7 @@ describe("Testing DecrementQuantity intent", function() {
       it("item quantity should be unchanged", function() {
           stewardItems.find({hash: testUserId, range: testItemName})
           .then(function(resp) {
+            console.log("resp is " + resp)
               decrementedItem = resp
           }).catch(function(err) {
               assert.fail()
