@@ -39,7 +39,7 @@ const blankInput =
 
 describe("Testing AddItem intent", function() {
 
-    describe("valid intput without quantity", function() {
+    describe("valid input without quantity", function() {
         var speechResponse = null
         var speechError = null
         var insertedItem = null

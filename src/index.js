@@ -7,6 +7,8 @@ const addItem = require('./intentDelegates/addItem');
 const queryItem = require('./intentDelegates/queryItem');
 const removeItem = require('./intentDelegates/removeItem');
 const queryCreateTime = require('./intentDelegates/queryCreateTime');
+const incrementQuantity = require('./intentDelegates/incrementQuantity')
+const decrementQuantity = require('./intentDelegates/decrementQuantity')
 const queryLocation = require('./intentDelegates/queryLocation');
 const updateLocation = require('./intentDelegates/updateLocation');
 
@@ -22,6 +24,10 @@ const handlers = {
     'QueryItem': function() { queryItem(this, stewardItems) },
 	
 	'QueryCreateTime' : function() { queryCreateTime(this, stewardItems) },
+
+    'IncrementQuantity': function() { incrementQuantity(this, stewardItems) },
+
+    'DecrementQuantity': function() { decrementQuantity(this, stewardItems) },
 
     'QueryLocation': function() { queryLocation(this, stewardItems) },
 
