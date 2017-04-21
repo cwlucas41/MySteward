@@ -75,10 +75,10 @@ describe("Testing DecrementQuantity intent", function() {
       var speechResponse = null
       var speechError = null
       var decrementedItem = null
+      var randomQuant = Math.floor((Math.random() * (100 - 2)) + 2);
 
       before(function(done){
           var input = JSON.parse(JSON.stringify(blankInput))
-          var randomQuant = Math.floor((Math.random() * (100 - 2)) + 2);
           input.request.intent.slots.Item.value = testItemName
           input.request.intent.slots.Quantity.value = randomQuant
           const testItem = {userId: testUserId, itemName: testItemName, quantity: (randomQuant+2)};
