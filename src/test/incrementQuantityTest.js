@@ -68,14 +68,17 @@ describe("Testing IncrementQuantity intent", function() {
             expect(speechResponse.response.shouldEndSession).to.be.true
         })
 
-        it("inserted item should have quantity increased by 1", function() {
-            stewardItems.find({hash: testUserId, range: testItemName})
+        it("item should have quantity increased", function() {
+            return stewardItems.find({hash: testUserId, range: testItemName})
             .then(function(resp) {
-                incrementedItem = resp.quantity
+                incrementedItem = resp
             }).catch(function(err) {
                 assert.fail()
             })
-            expect(incrementedItem).to.be.equal(testQuantity + 1)
+        })
+
+        it("item quantity should be increased by 1", function() {
+            expect(incrementedItem.quantity).to.be.equal(testQuantity + 1)
         })
 
     })
@@ -84,10 +87,10 @@ describe("Testing IncrementQuantity intent", function() {
         var speechResponse = null
         var speechError = null
         var incrementedItem = null
+        var randomQuant = Math.floor((Math.random() * (100 - 2)) + 2);
 
         before(function(done){
             var input = JSON.parse(JSON.stringify(blankInput))
-            var randomQuant = Math.floor((Math.random() * (100 - 2)) + 2);
             input.request.intent.slots.Item.value = testItemName
             input.request.intent.slots.Quantity.value = randomQuant
             const testItem = {userId: testUserId, itemName: testItemName, quantity: testQuantity};
@@ -111,13 +114,16 @@ describe("Testing IncrementQuantity intent", function() {
             expect(speechResponse.response.shouldEndSession).to.be.true
         })
 
-        it("item should have quantity increased by testQuantity", function() {
-            stewardItems.find({hash: testUserId, range: testItemName})
+        it("item should have quantity increased", function() {
+            return stewardItems.find({hash: testUserId, range: testItemName})
             .then(function(resp) {
                 incrementedItem = resp
             }).catch(function(err) {
                 assert.fail()
             })
+        })
+
+        it("item quantity should be increased by random amount", function() {
             expect(incrementedItem.quantity).to.be.equal(testQuantity + randomQuant)
         })
     })
@@ -152,13 +158,16 @@ describe("Testing IncrementQuantity intent", function() {
             expect(speechResponse.response.shouldEndSession).to.be.true
         })
 
-        it("item quantity should be unchanged", function() {
-            stewardItems.find({hash: testUserId, range: testItemName})
+        it("item should not have quantity increased", function() {
+            return stewardItems.find({hash: testUserId, range: testItemName})
             .then(function(resp) {
                 incrementedItem = resp
             }).catch(function(err) {
                 assert.fail()
             })
+        })
+
+        it("item quantity should be unchanged", function() {
             expect(incrementedItem.quantity).to.be.equal(testQuantity)
         })
     })
