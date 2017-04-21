@@ -20,7 +20,7 @@ const handlers = {
 
     'QueryItem': function() { queryItem(this, stewardItems) },
 	
-	'QueryCreateTime' : function() { queryCreateTime(this, stewardItems) };
+	'QueryCreateTime' : function() { queryCreateTime(this, stewardItems) },
 
     'QueryLocation': function() { queryLocation(this, stewardItems) },
 
