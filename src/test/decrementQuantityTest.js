@@ -112,7 +112,7 @@ describe("Testing DecrementQuantity intent", function() {
       })
 
       it("item should have quantity decreased by testQuantity", function() {
-          expect(decrementedItem.quantity).to.be.equal(testQuantity - randomQuant)
+          expect(decrementedItem.quantity).to.be.equal(2)
       })
   })
 
@@ -224,14 +224,16 @@ describe("Testing DecrementQuantity intent", function() {
           expect(speechResponse.response.shouldEndSession).to.be.true
       })
 
-      it("item quantity should be unchanged", function() {
-          stewardItems.find({hash: testUserId, range: testItemName})
+      it("item should not have quantity decreased", function() {
+          return stewardItems.find({hash: testUserId, range: testItemName})
           .then(function(resp) {
-            console.log("resp is " + resp)
               decrementedItem = resp
           }).catch(function(err) {
               assert.fail()
           })
+      })
+
+      it("item should have quantity decreased by testQuantity", function() {
           expect(decrementedItem.quantity).to.be.equal(testQuantity)
       })
   })
