@@ -12,7 +12,7 @@ module.exports = function(handler, table) {
             .then(function(resp) {
                 if (resp != undefined && resp.createTime != undefined) {
 					// rounding accounts for daylight savings
-					var timeDiff = round((Date.now() - Date(resp.createTime))/(1000*60*60*24))
+					var timeDiff = Math.round((Date.now() - Date(resp.createTime))/(1000*60*60*24))
 					handler.emit(':tell', handler.t('TIME_MESSAGE', slots.Item.value.toLowerCase(), timeDiff));
                 }
                 else {
