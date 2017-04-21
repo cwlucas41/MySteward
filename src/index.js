@@ -6,6 +6,7 @@ const languageStrings = require('./languageStrings');
 const addItem = require('./intentDelegates/addItem');
 const queryItem = require('./intentDelegates/queryItem');
 const removeItem = require('./intentDelegates/removeItem');
+const queryCreateTime = require('./intentDelegates/queryCreateTime');
 const queryLocation = require('./intentDelegates/queryLocation');
 const updateLocation = require('./intentDelegates/updateLocation');
 
@@ -19,6 +20,8 @@ const handlers = {
     'RemoveItem': function() { removeItem(this, stewardItems) },
 
     'QueryItem': function() { queryItem(this, stewardItems) },
+	
+	'QueryCreateTime' : function() { queryCreateTime(this, stewardItems) },
 
     'QueryLocation': function() { queryLocation(this, stewardItems) },
 
