@@ -48,7 +48,7 @@ describe("Testing DecrementQuantity intent", function() {
       before(function(done){
           var input = JSON.parse(JSON.stringify(blankInput))
           input.request.intent.slots.Item.value = testItemName
-          const testItem = {userId: testUserId, itemName: testItemName};
+          const testItem = {userId: testUserId, itemName: testItemName, quantity: testQuantity};
           executor.insertItemThenExecute(stewardItems, testItem, input, function(err, resp) {
               if (err) { console.log(err); speechError = err}
               else { speechResponse = resp }
@@ -81,7 +81,7 @@ describe("Testing DecrementQuantity intent", function() {
           var randomQuant = Math.floor((Math.random() * (100 - 2)) + 2);
           input.request.intent.slots.Item.value = testItemName
           input.request.intent.slots.Quantity.value = randomQuant
-          const testItem = {userId: testUserId, itemName: testItemName};
+          const testItem = {userId: testUserId, itemName: testItemName, quantity: (randomQuant+2)};
           executor.insertItemThenExecute(stewardItems, testItem, input, function(err, resp) {
               if (err) { console.log(err); speechError = err}
               else { speechResponse = resp }
@@ -102,16 +102,17 @@ describe("Testing DecrementQuantity intent", function() {
           expect(speechResponse.response.shouldEndSession).to.be.true
       })
 
-      it("item should have quantity decreased by testQuantity", function() {
+      it("item should have quantity decreased", function() {
           return stewardItems.find({hash: testUserId, range: testItemName})
           .then(function(resp) {
-              expect(resp).not.to.be.null
-              expect(resp).not.to.be.undefined
-              expect(resp.quantity).to.be.equal(testQuantity - randomQuant)
+              decrementedItem = resp
           }).catch(function(err) {
-              console.log(err)
               assert.fail()
           })
+      })
+
+      it("item should have quantity decreased by testQuantity", function() {
+          expect(decrementedItem.quantity).to.be.equal(testQuantity - randomQuant)
       })
   })
 
@@ -123,7 +124,7 @@ describe("Testing DecrementQuantity intent", function() {
           var input = JSON.parse(JSON.stringify(blankInput))
           input.request.intent.slots.Item.value = testItemName
           input.request.intent.slots.Quantity.value = testQuantity
-          const testItem = {userId: testUserId, itemName: testItemName};
+          const testItem = {userId: testUserId, itemName: testItemName, quantity: testQuantity};
           executor.insertItemThenExecute(stewardItems, testItem, input, function(err, resp) {
               if (err) { console.log(err); speechError = err}
               else { speechResponse = resp }
@@ -162,7 +163,7 @@ describe("Testing DecrementQuantity intent", function() {
           var input = JSON.parse(JSON.stringify(blankInput))
           input.request.intent.slots.Item.value = testItemName
           input.request.intent.slots.Quantity.value = testQuantity + 1
-          const testItem = {userId: testUserId, itemName: testItemName};
+          const testItem = {userId: testUserId, itemName: testItemName, quantity: testQuantity};
           executor.insertItemThenExecute(stewardItems, testItem, input, function(err, resp) {
               if (err) { console.log(err); speechError = err}
               else { speechResponse = resp }
@@ -202,7 +203,7 @@ describe("Testing DecrementQuantity intent", function() {
           var input = JSON.parse(JSON.stringify(blankInput))
           input.request.intent.slots.Item.value = testItemName
           input.request.intent.slots.Quantity.value = 0
-          const testItem = {userId: testUserId, itemName: testItemName};
+          const testItem = {userId: testUserId, itemName: testItemName, quantity: testQuantity};
           executor.insertItemThenExecute(stewardItems, testItem, input, function(err, resp) {
               if (err) { console.log(err); speechError = err}
               else { speechResponse = resp }
@@ -241,7 +242,7 @@ describe("Testing DecrementQuantity intent", function() {
 
       before(function(done){
           var input = JSON.parse(JSON.stringify(blankInput))
-          const testItem = {userId: testUserId, itemName: testItemName};
+          const testItem = {userId: testUserId, itemName: testItemName, quantity: testQuantity};
           executor.insertItemThenExecute(stewardItems, testItem, input, function(err, resp) {
               if (err) { console.log(err); speechError = err}
               else { speechResponse = resp }
