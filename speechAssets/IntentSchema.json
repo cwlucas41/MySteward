@@ -57,6 +57,19 @@
         ]
     },
     {
+        "intent": "UpdateLocation",
+        "slots": [
+            {
+                "name": "Item",
+                "type": "LIST_OF_ITEMS"
+            },
+            {
+                "name": "Location",
+                "type": "LOCATION"
+            }
+        ]
+    },
+    {
         "intent": "RemoveItem",
         "slots": [
             {
