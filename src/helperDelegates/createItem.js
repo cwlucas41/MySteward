@@ -17,6 +17,11 @@ module.exports = function(handler, table) {
         } else {
             record.quantity = 1;
         }
+        if (slots.Location && slots.Location.value) {
+            record.location = slots.Location.value
+        }
+
+        console.log("INSERTING: " + record)
 
         table
         .insert(record)

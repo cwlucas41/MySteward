@@ -22,7 +22,7 @@ const handlers = {
     'RemoveItem': function() { removeItem(this, stewardItems) },
 
     'QueryItem': function() { queryItem(this, stewardItems) },
-	
+
 	'QueryCreateTime' : function() { queryCreateTime(this, stewardItems) },
 
     'IncrementQuantity': function() { incrementQuantity(this, stewardItems) },
