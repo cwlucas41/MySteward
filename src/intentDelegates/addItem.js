@@ -6,7 +6,6 @@ module.exports = function(handler, table) {
 
     const slots = handler.event.request.intent.slots
     var setQuantity = 1;
-    var skip = false;
 
     if (slots.Item && slots.Item.value) {
         table
@@ -14,24 +13,21 @@ module.exports = function(handler, table) {
                 range: slots.Item.value
                 })
         .then(function(resp) {
-            console.log(resp)
             if (resp == undefined) {
-                createItem(handler, table);
-                console.log("CREATE")
+              createItem(handler, table);
             } else {
-                console.log("NOT CREATE")
-                if (slots.Quantity && slots.Quantity.value) {
-                  setQuantity = slots.Quantity.value;
-                }
-                table
-                .update({hash: handler.event.session.user.userId, range: slots.Item.value.toLowerCase()}, { quantity: setQuantity })
-                .then(function(resp) {
-                    handler.emit('Affirmative');
-                })
-                .catch(function(err) {
-                    console.log(err);
-                    handler.emit('Error');
-                });
+              if (slots.Quantity && slots.Quantity.value) {
+                setQuantity = slots.Quantity.value;
+              }
+              table
+              .update({hash: handler.event.session.user.userId, range: slots.Item.value.toLowerCase()}, { quantity: setQuantity })
+              .then(function(resp) {
+                  handler.emit('Affirmative');
+              })
+              .catch(function(err) {
+                  console.log(err);
+                  handler.emit('Error');
+              });
             }
         })
 
