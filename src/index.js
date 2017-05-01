@@ -2,6 +2,7 @@
 
 const Alexa = require('alexa-sdk');
 const dynasty = require('dynasty')({});
+const pluralize = require('pluralize');
 const languageStrings = require('./languageStrings');
 const setQuantity = require('./intentDelegates/setQuantity');
 const queryItem = require('./intentDelegates/queryItem');
@@ -64,6 +65,11 @@ exports.handler = (event, context) => {
     alexa.appId = APP_ID;
     // To enable string internationalization (i18n) features, set a resources object.
     alexa.resources = languageStrings.strings;
+
+    // modify event to singualar items
+    if (event.request.intent.slots.Item.value) {
+        event.request.intent.slots.Item.value = pluralize.singular(event.request.intent.slots.Item.value)
+    }
     alexa.registerHandlers(handlers);
     alexa.execute();
 };

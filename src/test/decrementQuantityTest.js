@@ -7,6 +7,7 @@ const ssmlWrap = require('./resources/ssmlWrap')
 const executor = require('./resources/alexaExecutor')
 const dynasty = require('dynasty')({});
 const sprintf = require("sprintf-js").sprintf
+const find = require('./resources/databaseWrappers').find
 
 const strings = languageStrings.strings.en.translation
 const stewardItems = dynasty.table('Steward_Items');
@@ -103,7 +104,7 @@ describe("Testing DecrementQuantity intent", function() {
       })
 
       it("item should have quantity decreased", function() {
-          return stewardItems.find({hash: testUserId, range: testItemName})
+          find(stewardItems, {hash: testUserId, range: testItemName})
           .then(function(resp) {
               decrementedItem = resp
           }).catch(function(err) {
@@ -146,7 +147,7 @@ describe("Testing DecrementQuantity intent", function() {
       })
 
       it("item should have been removed", function() {
-        return stewardItems.find({hash: testUserId, range: testItemName})
+        find(stewardItems, {hash: testUserId, range: testItemName})
         .then(function(resp) {
             expect(resp).to.be.undefined;
         }).catch(function(err) {
@@ -185,7 +186,7 @@ describe("Testing DecrementQuantity intent", function() {
       })
 
       it("item should have been removed", function() {
-        return stewardItems.find({hash: testUserId, range: testItemName})
+        find(stewardItems, {hash: testUserId, range: testItemName})
         .then(function(resp) {
             expect(resp).to.be.undefined;
         }).catch(function(err) {
@@ -266,7 +267,7 @@ describe("Testing DecrementQuantity intent", function() {
       })
 
       it("should not have modified the database", function() {
-          return stewardItems.find({hash: testUserId, range: testItemName})
+          find(stewardItems, {hash: testUserId, range: testItemName})
           .then(function(resp) {
              expect(resp.quantity).to.be.equal(testQuantity)
           }).catch(function(err) {

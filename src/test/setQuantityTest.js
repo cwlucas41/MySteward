@@ -9,6 +9,7 @@ const dynasty = require('dynasty')({});
 
 const strings = languageStrings.strings.en.translation
 const stewardItems = dynasty.table('Steward_Items');
+const find = require('./resources/databaseWrappers').find
 
 const testUserId = 'test'
 const testItemName = 'eggs'
@@ -71,7 +72,7 @@ describe("Testing SetQuantity intent", function() {
         })
 
         it("should have inserted an item", function() {
-            return stewardItems.find({hash: testUserId, range: testItemName})
+            find(stewardItems, {hash: testUserId, range: testItemName})
             .then(function(resp) {
                 insertedItem = resp
             }).catch(function(err) {
@@ -119,7 +120,7 @@ describe("Testing SetQuantity intent", function() {
         })
 
         it("should have inserted an item", function() {
-            return stewardItems.find({hash: testUserId, range: testItemName})
+            find(stewardItems, {hash: testUserId, range: testItemName})
             .then(function(resp) {
                 insertedItem = resp
             }).catch(function(err) {
@@ -168,7 +169,7 @@ describe("Testing SetQuantity intent", function() {
         })
 
         it("should have inserted an item", function() {
-            return stewardItems.find({hash: testUserId, range: testItemName})
+            find(stewardItems, {hash: testUserId, range: testItemName})
             .then(function(resp) {
                 insertedItem = resp
             }).catch(function(err) {
@@ -216,7 +217,7 @@ describe("Testing SetQuantity intent", function() {
         })
 
         it("should have inserted an item", function() {
-            return stewardItems.find({hash: testUserId, range: testItemName})
+            find(stewardItems, {hash: testUserId, range: testItemName})
             .then(function(resp) {
                 insertedItem = resp
             }).catch(function(err) {
@@ -264,7 +265,7 @@ describe("Testing SetQuantity intent", function() {
         })
 
         it("should have inserted an item", function() {
-            return stewardItems.find({hash: testUserId, range: testItemName})
+            find(stewardItems, {hash: testUserId, range: testItemName})
             .then(function(resp) {
                 insertedItem = resp
             }).catch(function(err) {
@@ -316,7 +317,7 @@ describe("Testing SetQuantity intent", function() {
         })
 
         it("should have inserted an item", function() {
-            return stewardItems.find({hash: testUserId, range: testItemName})
+            find(stewardItems, {hash: testUserId, range: testItemName})
             .then(function(resp) {
                 insertedItem = resp
             }).catch(function(err) {
@@ -365,7 +366,7 @@ describe("Testing SetQuantity intent", function() {
         })
 
         it("should not have inserted to the database", function() {
-            return stewardItems.find({hash: testUserId, range: testItemName})
+            find(stewardItems, {hash: testUserId, range: testItemName})
             .then(function(resp) {
                 expect(resp).to.be.undefined
             }).catch(function(err) {

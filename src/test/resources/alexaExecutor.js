@@ -3,24 +3,21 @@
 const index = require('../../index');
 const context = require('aws-lambda-mock-context');
 const dynasty = require('dynasty')({});
+const wrapper = require('./databaseWrappers');
 
 module.exports = {
     deleteItemThenExecute: function(table, item, input, callback) {
-        table
-        // {hash: testUserId, range: testItemName}
-        .remove(item)
-        .then((resp) => {
-            this.execute(input, callback)
-        }).catch(err => { callback(err,null) })
+        const executor = this;
+        wrapper.delete(table, item)
+        .then(resp => executor.execute(input, callback))
+        .catch(err => console.log(err))
     },
 
     insertItemThenExecute: function(table, item, input, callback) {
-        table
-        //{userId: testUserId, itemName: testItemName}
-        .insert(item)
-        .then((resp) => {
-            this.execute(input, callback)
-        }).catch(err => { callback(err,null) })
+        const executor = this;
+        wrapper.insert(table, item)
+        .then(resp => executor.execute(input, callback))
+        .catch(err => console.log(err))
     },
 
     execute: function(input, callback) {
