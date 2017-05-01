@@ -41,7 +41,7 @@ const blankInput =
 
 describe("Testing AddItem intent", function() {
 
-    describe("valid input without quantity", function() {
+    describe("valid input without quantity create", function() {
         var speechResponse = null
         var speechError = null
         var insertedItem = null
@@ -89,7 +89,7 @@ describe("Testing AddItem intent", function() {
 
     })
 
-    describe("valid input without location", function() {
+    describe("valid input without location create", function() {
         var speechResponse = null
         var speechError = null
         var insertedItem = null
@@ -137,7 +137,7 @@ describe("Testing AddItem intent", function() {
 
     })
 
-    describe("valid input with location", function() {
+    describe("valid input with location create", function() {
         var speechResponse = null
         var speechError = null
         var insertedItem = null
@@ -183,10 +183,9 @@ describe("Testing AddItem intent", function() {
         it("inserted item shoudl have creation timestamp", function() {
             expect(insertedItem.createTime).not.to.be.null
         })
-
     })
 
-    describe("valid input with quantity", function() {
+    describe("valid input with quantity create", function() {
         var speechResponse = null
         var speechError = null
         var insertedItem = null
@@ -227,6 +226,110 @@ describe("Testing AddItem intent", function() {
 
         it("inserted item should have quantity of testQuantity", function() {
             expect(insertedItem.quantity).to.be.equal(testQuantity)
+        })
+
+        it("inserted item shoudl have creation timestamp", function() {
+            expect(insertedItem.createTime).not.to.be.null
+        })
+    })
+
+    describe("valid input with location update", function() {
+        var speechResponse = null
+        var speechError = null
+        var insertedItem = null
+
+        before(function(done){
+            var input = JSON.parse(JSON.stringify(blankInput))
+            input.request.intent.slots.Item.value = testItemName
+            input.request.intent.slots.Location.value = testLocation
+            const testItem = {userId: testUserId, itemName: testItemName, location: "old location", quantity: testQuantity - 1};
+            executor.insertItemThenExecute(stewardItems, testItem, input, function(err, resp) {
+                if (err) { console.log(err); speechError = err}
+                else { speechResponse = resp }
+                done()
+            })
+        })
+
+        it('should not have errored',function() {
+            expect(speechError).to.be.null
+        })
+
+        it("should have an affirmative message", function() {
+            expect(speechResponse.response.outputSpeech.ssml).to.be.oneOf(strings.AFFIRMATIVE_MESSAGE.map(ssmlWrap))
+        })
+
+        it("should end the alexa session", function() {
+            expect(speechResponse.response.shouldEndSession).not.to.be.null
+            expect(speechResponse.response.shouldEndSession).to.be.true
+        })
+
+        it("should have inserted an item", function() {
+            return stewardItems.find({hash: testUserId, range: testItemName})
+            .then(function(resp) {
+                insertedItem = resp
+            }).catch(function(err) {
+                assert.fail()
+            })
+        })
+
+        it("inserted item should have a location", function() {
+            expect(insertedItem.location).to.be.string(testLocation)
+        })
+
+        it("should not have modified existing quantity", function() {
+            expect(insertedItem.quantity).to.be.equal(testQuantity - 1)
+        })
+
+        it("inserted item shoudl have creation timestamp", function() {
+            expect(insertedItem.createTime).not.to.be.null
+        })
+    })
+
+    describe("valid input with quantity update", function() {
+        var speechResponse = null
+        var speechError = null
+        var insertedItem = null
+
+        before(function(done){
+            var input = JSON.parse(JSON.stringify(blankInput))
+            input.request.intent.slots.Item.value = testItemName
+            input.request.intent.slots.Quantity.value = testQuantity
+            const testItem = {userId: testUserId, itemName: testItemName, location: "old location", quantity: testQuantity - 1};
+            executor.insertItemThenExecute(stewardItems, testItem, input, function(err, resp) {
+                if (err) { console.log(err); speechError = err}
+                else { speechResponse = resp }
+                done()
+            })
+        })
+
+        it('should not have errored',function() {
+            expect(speechError).to.be.null
+        })
+
+        it("should have an affirmative message", function() {
+            expect(speechResponse.response.outputSpeech.ssml).to.be.oneOf(strings.AFFIRMATIVE_MESSAGE.map(ssmlWrap))
+        })
+
+        it("should end the alexa session", function() {
+            expect(speechResponse.response.shouldEndSession).not.to.be.null
+            expect(speechResponse.response.shouldEndSession).to.be.true
+        })
+
+        it("should have inserted an item", function() {
+            return stewardItems.find({hash: testUserId, range: testItemName})
+            .then(function(resp) {
+                insertedItem = resp
+            }).catch(function(err) {
+                assert.fail()
+            })
+        })
+
+        it("inserted item should have quantity of testQuantity", function() {
+            expect(insertedItem.quantity).to.be.equal(testQuantity)
+        })
+
+        it("should not have modified existing location", function() {
+            expect(insertedItem.location).to.be.string("old location")
         })
 
         it("inserted item shoudl have creation timestamp", function() {

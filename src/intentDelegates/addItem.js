@@ -46,11 +46,15 @@ module.exports = function(handler, table) {
                     handler.emit('Error')
                 }
             } else {
+                var updateRecord = {};
               if (slots.Quantity && slots.Quantity.value) {
-                setQuantity = slots.Quantity.value;
+                updateRecord.quantity = slots.Quantity.value;
+              }
+              if (slots.Location && slots.Location.value) {
+                  updateRecord.location = slots.Location.value
               }
               table
-              .update({hash: handler.event.session.user.userId, range: slots.Item.value.toLowerCase()}, { quantity: setQuantity })
+              .update({hash: handler.event.session.user.userId, range: slots.Item.value.toLowerCase()}, updateRecord)
               .then(function(resp) {
                   handler.emit('Affirmative');
               })
