@@ -3,7 +3,7 @@
 const Alexa = require('alexa-sdk');
 const dynasty = require('dynasty')({});
 const languageStrings = require('./languageStrings');
-const addItem = require('./intentDelegates/addItem');
+const setQuantity = require('./intentDelegates/setQuantity');
 const queryItem = require('./intentDelegates/queryItem');
 const removeItem = require('./intentDelegates/removeItem');
 const queryCreateTime = require('./intentDelegates/queryCreateTime');
@@ -17,7 +17,7 @@ const stewardItems = dynasty.table('Steward_Items');
 
 const handlers = {
 
-    'AddItem': function() { addItem(this, stewardItems) },
+    'SetQuantity': function() { setQuantity(this, stewardItems) },
 
     'RemoveItem': function() { removeItem(this, stewardItems) },
 

@@ -28,7 +28,7 @@ const blankInput =
         "type": "IntentRequest",
         "locale": "en-US",
         "intent": {
-            "name": "AddItem",
+            "name": "SetQuantity",
             "slots": {
                 "Item": {"name": "Item"},
                 "Quantity": {"name": "Quantity"},
@@ -39,7 +39,7 @@ const blankInput =
     "version": "1.0"
 }
 
-describe("Testing AddItem intent", function() {
+describe("Testing SetQuantity intent", function() {
 
     describe("valid input without quantity create", function() {
         var speechResponse = null
