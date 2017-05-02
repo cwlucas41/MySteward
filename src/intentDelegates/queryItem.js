@@ -12,12 +12,11 @@ module.exports = function(handler, table) {
                     range: slots.Item.value
                     })
             .then(function(resp) {
-                const pluralName = pluralize(slots.Item.value)
                 if (resp != undefined && resp.quantity != undefined && resp.quantity != 0) {
-                  handler.emit(':tell', handler.t('QUANTITY_NONZERO', resp.quantity, pluralName));
+                  handler.emit(':tell', handler.t('QUANTITY_NONZERO', resp.quantity, pluralize(slots.Item.value, resp.quantity)));
                 }
                 else {
-                  handler.emit(':tell', handler.t('QUANTITY_ZERO', pluralName));
+                  handler.emit(':tell', handler.t('QUANTITY_ZERO', pluralize(slots.Item.value)));
                 }
             })
             .catch(function(err) {
