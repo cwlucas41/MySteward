@@ -1,5 +1,7 @@
 'use strict';
 
+const pluralize = require('pluralize');
+
 module.exports = function(handler, table) {
 
     const slots = handler.event.request.intent.slots
@@ -10,11 +12,12 @@ module.exports = function(handler, table) {
                     range: slots.Item.value
                     })
             .then(function(resp) {
+                const pluralName = pluralize(slots.Item.value)
                 if (resp != undefined && resp.quantity != undefined && resp.quantity != 0) {
-                  handler.emit(':tell', handler.t('QUANTITY_NONZERO', resp.quantity, slots.Item.value.toLowerCase()));
+                  handler.emit(':tell', handler.t('QUANTITY_NONZERO', resp.quantity, pluralName));
                 }
                 else {
-                  handler.emit(':tell', handler.t('QUANTITY_ZERO', slots.Item.value.toLowerCase()));
+                  handler.emit(':tell', handler.t('QUANTITY_ZERO', pluralName));
                 }
             })
             .catch(function(err) {

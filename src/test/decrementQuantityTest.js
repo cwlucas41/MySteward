@@ -226,7 +226,7 @@ describe("Testing DecrementQuantity intent", function() {
       })
 
       it("item should not have quantity decreased", function() {
-          return stewardItems.find({hash: testUserId, range: testItemName})
+          return find(stewardItems, {hash: testUserId, range: testItemName})
           .then(function(resp) {
               decrementedItem = resp
           }).catch(function(err) {
