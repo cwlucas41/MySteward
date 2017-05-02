@@ -74,7 +74,7 @@ describe("Testing UpdateLocation intent", function() {
             expect(speechResponse.response.shouldEndSession).to.be.true
         })
          it("should have updated an item", function() {
-            find(stewardItems, {hash: testUserId, range: testItemName})
+            return find(stewardItems, {hash: testUserId, range: testItemName})
             .then(function(resp) {
                 expect(resp.location).not.to.be.undefined
                 expect(resp.location).to.be.string(testNewLocation)
@@ -113,7 +113,7 @@ describe("Testing UpdateLocation intent", function() {
             expect(speechResponse.response.shouldEndSession).to.be.true
         })
         it("should have updated an item", function() {
-            find(stewardItems, {hash: testUserId, range: testItemName})
+            return find(stewardItems, {hash: testUserId, range: testItemName})
             .then(function(resp) {
                 expect(resp.location).not.to.be.undefined
                 expect(resp.location).to.be.string(testNewLocation)

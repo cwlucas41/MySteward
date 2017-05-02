@@ -69,7 +69,7 @@ describe("Testing RemoveItem intent", function() {
         })
 
         it("should have remove item from database", function() {
-            find(stewardItems, {hash: testUserId, range: testItemName})
+            return find(stewardItems, {hash: testUserId, range: testItemName})
             .then(function(resp) {
                 expect(resp).to.be.undefined;
             }).catch(function(err) {
@@ -135,7 +135,7 @@ describe("Testing RemoveItem intent", function() {
         })
 
         it("should not have removed from the database", function() {
-            find(stewardItems, {hash: testUserId, range: testItemName})
+            return find(stewardItems, {hash: testUserId, range: testItemName})
             .then(function(resp) {
                 expect(resp).not.to.be.undefined
             }).catch(function(err) {

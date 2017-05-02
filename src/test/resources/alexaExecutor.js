@@ -9,7 +9,7 @@ module.exports = {
     deleteItemThenExecute: function(table, item, input, callback) {
         const executor = this;
         wrapper.delete(table, item)
-        .then(resp => executor.execute(input, callback))
+        .then(resp => {executor.execute(input, callback) })
         .catch(err => console.log(err))
     },
 

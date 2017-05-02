@@ -104,7 +104,7 @@ describe("Testing DecrementQuantity intent", function() {
       })
 
       it("item should have quantity decreased", function() {
-          find(stewardItems, {hash: testUserId, range: testItemName})
+          return find(stewardItems, {hash: testUserId, range: testItemName})
           .then(function(resp) {
               decrementedItem = resp
           }).catch(function(err) {
@@ -113,7 +113,6 @@ describe("Testing DecrementQuantity intent", function() {
       })
 
       it("item should have quantity decreased by testQuantity", function() {
-          console.log(decrementedItem)
           expect(decrementedItem.quantity).to.be.equal(2)
       })
   })
@@ -148,7 +147,7 @@ describe("Testing DecrementQuantity intent", function() {
       })
 
       it("item should have been removed", function() {
-        find(stewardItems, {hash: testUserId, range: testItemName})
+        return find(stewardItems, {hash: testUserId, range: testItemName})
         .then(function(resp) {
             expect(resp).to.be.undefined;
         }).catch(function(err) {
@@ -187,7 +186,7 @@ describe("Testing DecrementQuantity intent", function() {
       })
 
       it("item should have been removed", function() {
-        find(stewardItems, {hash: testUserId, range: testItemName})
+        return find(stewardItems, {hash: testUserId, range: testItemName})
         .then(function(resp) {
             expect(resp).to.be.undefined;
         }).catch(function(err) {
@@ -268,7 +267,7 @@ describe("Testing DecrementQuantity intent", function() {
       })
 
       it("should not have modified the database", function() {
-          find(stewardItems, {hash: testUserId, range: testItemName})
+          return find(stewardItems, {hash: testUserId, range: testItemName})
           .then(function(resp) {
              expect(resp.quantity).to.be.equal(testQuantity)
           }).catch(function(err) {

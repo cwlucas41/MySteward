@@ -8,8 +8,8 @@ module.exports = function(handler, table) {
     if (slots.Item && slots.Item.value) {
         table
         .find({ hash: handler.event.session.user.userId,
-                range: slots.Item.value
-                })
+            range: slots.Item.value
+        })
         .then(function(resp) {
             if (resp == undefined) {
                 var record = {
@@ -47,21 +47,21 @@ module.exports = function(handler, table) {
                 }
             } else {
                 var updateRecord = {};
-              if (slots.Quantity && slots.Quantity.value) {
-                updateRecord.quantity = slots.Quantity.value;
-              }
-              if (slots.Location && slots.Location.value) {
-                  updateRecord.location = slots.Location.value
-              }
-              table
-              .update({hash: handler.event.session.user.userId, range: slots.Item.value.toLowerCase()}, updateRecord)
-              .then(function(resp) {
-                  handler.emit('Affirmative');
-              })
-              .catch(function(err) {
-                  console.log(err);
-                  handler.emit('Error');
-              });
+                if (slots.Quantity && slots.Quantity.value) {
+                    updateRecord.quantity = slots.Quantity.value;
+                }
+                if (slots.Location && slots.Location.value) {
+                    updateRecord.location = slots.Location.value
+                }
+                table
+                .update({hash: handler.event.session.user.userId, range: slots.Item.value.toLowerCase()}, updateRecord)
+                .then(function(resp) {
+                    handler.emit('Affirmative');
+                })
+                .catch(function(err) {
+                    console.log(err);
+                    handler.emit('Error');
+                });
             }
         })
 

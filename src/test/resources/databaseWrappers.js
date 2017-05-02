@@ -6,44 +6,29 @@ const pluralize = require('pluralize');
 
 module.exports = {
     delete: function(table, item) {
-        return new Promise(function(resolve, reject) {
-            if (item.hash) {
-                item.hash = pluralize.singular(item.hash);
-            } else {
-                console.log("database wrapper singularize problem")
-            }
-            table
-            .remove(item)
-            .then(resp => { resolve(resp) })
-            .catch(err => { reject(err) })
-        })
+        if (item.range) {
+            item.range = pluralize.singular(item.range);
+        } else {
+            console.log("database wrapper singularize problem")
+        }
+        return table.remove(item)
     },
 
     insert: function(table, item) {
-        return new Promise(function(resolve, reject) {
-            if (item.itemName) {
-                item.itemName = pluralize.singular(item.itemName);
-            } else {
-                console.log("database wrapper singularize problem")
-            }
-            table
-            .insert(item)
-            .then(resp => { resolve(resp) })
-            .catch(err => { reject(err) })
-        })
+        if (item.itemName) {
+            item.itemName = pluralize.singular(item.itemName);
+        } else {
+            console.log("database wrapper singularize problem")
+        }
+        return table.insert(item)
     },
 
     find: function(table, item) {
-        return new Promise(function(resolve, reject) {
-            if (item.hash) {
-                item.hash = pluralize.singular(item.hash);
-            } else {
-                console.log("database wrapper singularize problem")
-            }
-            table
-            .find(item)
-            .then(resp => { resolve(resp) })
-            .catch(err => { reject(err) })
-        })
+        if (item.range) {
+            item.range = pluralize.singular(item.range);
+        } else {
+            console.log("database wrapper singularize problem")
+        }
+        return table.find(item)
     },
 }

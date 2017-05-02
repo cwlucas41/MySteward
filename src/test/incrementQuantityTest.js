@@ -70,7 +70,7 @@ describe("Testing IncrementQuantity intent", function() {
         })
 
         it("item should have quantity increased", function() {
-            find(stewardItems, {hash: testUserId, range: testItemName})
+            return find(stewardItems, {hash: testUserId, range: testItemName})
             .then(function(resp) {
                 incrementedItem = resp
             }).catch(function(err) {
@@ -116,7 +116,7 @@ describe("Testing IncrementQuantity intent", function() {
         })
 
         it("item should have quantity increased", function() {
-            find(stewardItems, {hash: testUserId, range: testItemName})
+            return find(stewardItems, {hash: testUserId, range: testItemName})
             .then(function(resp) {
                 incrementedItem = resp
             }).catch(function(err) {
@@ -160,7 +160,7 @@ describe("Testing IncrementQuantity intent", function() {
         })
 
         it("item should not have quantity increased", function() {
-            find(stewardItems, {hash: testUserId, range: testItemName})
+            return find(stewardItems, {hash: testUserId, range: testItemName})
             .then(function(resp) {
                 incrementedItem = resp
             }).catch(function(err) {
@@ -201,7 +201,7 @@ describe("Testing IncrementQuantity intent", function() {
         })
 
         it("should not have modified the database", function() {
-            find(stewardItems, {hash: testUserId, range: testItemName})
+            return find(stewardItems, {hash: testUserId, range: testItemName})
             .then(function(resp) {
                expect(resp.quantity).to.be.equal(testQuantity)
             }).catch(function(err) {
