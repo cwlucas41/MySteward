@@ -23,7 +23,7 @@ module.exports = function(handler, table) {
                     record.itemName = slots.Item.value.toLowerCase();
 
                     if (slots.Quantity && slots.Quantity.value) {
-                        record.quantity = slots.Quantity.value;
+                        record.quantity = parseInt(slots.Quantity.value);
                     } else {
                         record.quantity = 1;
                     }
@@ -48,7 +48,7 @@ module.exports = function(handler, table) {
             } else {
                 var updateRecord = {};
                 if (slots.Quantity && slots.Quantity.value) {
-                    updateRecord.quantity = slots.Quantity.value;
+                    updateRecord.quantity = parseInt(slots.Quantity.value);
                 }
                 if (slots.Location && slots.Location.value) {
                     updateRecord.location = slots.Location.value

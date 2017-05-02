@@ -21,6 +21,10 @@ module.exports = {
     },
 
     execute: function(input, callback) {
+        const slots = input.request.intent.slots
+        if (slots.Quantity != undefined && slots.Quantity.value != undefined) {
+            slots.Quantity.value = String(slots.Quantity.value)
+        }
         const ctx = context()
         index.handler(input, ctx)
         ctx.Promise

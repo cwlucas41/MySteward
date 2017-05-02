@@ -204,8 +204,6 @@ describe("Testing IncrementQuantity intent", function() {
             return find(stewardItems, {hash: testUserId, range: testItemName})
             .then(function(resp) {
                expect(resp.quantity).to.be.equal(testQuantity)
-            }).catch(function(err) {
-                assert.fail()
             })
         })
     })
