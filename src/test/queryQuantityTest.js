@@ -29,7 +29,7 @@ const blankInput =
         "type": "IntentRequest",
         "locale": "en-US",
         "intent": {
-            "name": "QueryItem",
+            "name": "QueryQuantity",
             "slots": {
                 "Item": {"name": "Item"}
             }
