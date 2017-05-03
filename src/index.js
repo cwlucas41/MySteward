@@ -18,13 +18,16 @@ const stewardItems = dynasty.table('Steward_Items');
 
 const handlers = {
 
-    'SetQuantity': function() { setQuantity(this, stewardItems) },
+    'SetQuantity': function() {
+      setQuantity(this, stewardItems)
+      // dialogHandler(setQuantity(), this)
+    },
 
     'RemoveItem': function() { removeItem(this, stewardItems) },
 
     'QueryQuantity': function() { queryQuantity(this, stewardItems) },
 
-	'QueryCreateTime' : function() { queryCreateTime(this, stewardItems) },
+	  'QueryCreateTime' : function() { queryCreateTime(this, stewardItems) },
 
     'IncrementQuantity': function() { incrementQuantity(this, stewardItems) },
 
@@ -32,7 +35,10 @@ const handlers = {
 
     'QueryLocation': function() { queryLocation(this, stewardItems) },
 
-    'UpdateLocation': function() { updateLocation(this, stewardItems) },
+    'UpdateLocation': function() {
+      // updateLocation(this, stewardItems)
+      dialogHandler(updateLocation, this)
+    },
 
     'Affirmative': function() {
         const responses = this.t('AFFIRMATIVE_MESSAGE');
@@ -74,3 +80,11 @@ exports.handler = (event, context) => {
     alexa.registerHandlers(handlers);
     alexa.execute();
 };
+
+function dialogHandler(intentHandler, handler) {
+  if (intentRequest.dialogState !== "COMPLETED"){
+    this.emit(':delegate')
+  } else {
+    intentHandler(handler, stewardItems)
+  }
+}
