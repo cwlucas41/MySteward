@@ -84,10 +84,10 @@ exports.handler = (event, context) => {
 
 function dialogHandler(intentHandler, handler) {
   console.log("It got to the bleeeehhhh")
-  if (intentRequest.dialogState === "STARTED") {
+  if (handler.event.request.dialogState === "STARTED") {
     console.log("It got to the first one")
     handler.emit(':delegate', handler.event.request.intent)
-  } else if (intentRequest.dialogState !== "COMPLETED"){
+  } else if (handler.event.request.dialogState !== "COMPLETED"){
     console.log("It got to the second one")
     handler.emit(':delegate')
   } else {
