@@ -17,6 +17,8 @@ module.exports = {
         QUANTITY_LOCATION_UPDATE: 'Okay, you have %d %s %s',
         REMOVE_MESSAGE_SINGULAR: "Okay, your %s has been removed",
         REMOVE_MESSAGE_PLURAL: "Okay, your %s have been removed",
+        MOVE_MESSAGE_SINGULAR: "Okay, your %s has been moved %s",
+        MOVE_MESSAGE_PLURAL: "Okay, your %s have been moved %s",
         THRESHOLD_NONE: 'You have at least %d of everything.',
         THRESHOLD_GROUP: 'You have less than %d of %s',
         TIME_MESSAGE: 'You acquired %s, %d days ago',
