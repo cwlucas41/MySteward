@@ -38,7 +38,9 @@ const handlers = {
     'UpdateLocation': function() {
       // updateLocation(this, stewardItems)
         console.log("It got to the god damn string")
-      dialogHandler(updateLocation, this)
+        //dialogHandler()
+        var filledSlots = delegateHandler.call(this)
+        updateLocation(this, stewardItems)
     },
 
     'Affirmative': function() {
@@ -82,16 +84,17 @@ exports.handler = (event, context) => {
     alexa.execute();
 };
 
-function dialogHandler(intentHandler, handler) {
+function dialogHandler() {
   console.log("It got to the bleeeehhhh")
-  if (handler.event.request.dialogState === "STARTED") {
+  if (this.event.request.dialogState === "STARTED") {
     console.log("It got to the first one")
-    handler.emit(':delegate', handler.event.request.intent)
-  } else if (handler.event.request.dialogState !== "COMPLETED"){
+    this.emit(':delegate', this.event.request.intent)
+  } else if (this.event.request.dialogState !== "COMPLETED"){
     console.log("It got to the second one")
-    handler.emit(':delegate')
+    this.emit(':delegate')
   } else {
     console.log("It got to the third one")
-    intentHandler(handler, stewardItems)
+    //intentHandler(handler, stewardItems)
+    return this.event.request.intent
   }
 }
