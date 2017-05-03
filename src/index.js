@@ -91,7 +91,7 @@ exports.handler = (event, context) => {
   alexa.resources = languageStrings.strings;
 
   // modify event to singualar items
-  if (event.request.intent.slots.Item.value && event.session.new && event.request.dialogState === "COMPLETED") {
+  if (event.request.intent.slots.Item.value && event.request.dialogState === "COMPLETED") {
     event.request.intent.slots.Item.original = event.request.intent.slots.Item.value
     event.request.intent.slots.Item.value = pluralize.singular(event.request.intent.slots.Item.value)
   }
