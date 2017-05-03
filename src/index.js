@@ -79,6 +79,7 @@ exports.handler = (event, context) => {
     if (event.request.intent.slots.Item.value) {
         event.request.intent.slots.Item.original = event.request.intent.slots.Item.value
         event.request.intent.slots.Item.value = pluralize.singular(event.request.intent.slots.Item.value)
+        console.log(event.request.intent.slots.Item)
     }
     alexa.registerHandlers(handlers);
     alexa.execute();
