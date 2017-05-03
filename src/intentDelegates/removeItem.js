@@ -14,12 +14,7 @@ module.exports = function(handler, table) {
         table
         .remove(record)
         .then(function(resp) {
-          if (slots.Item.value != slots.Item.original) {
-              handler.emit(':tell', handler.t('REMOVE_MESSAGE_PLURAL', slots.Item.original));
-          }
-          else {
-              handler.emit(':tell', handler.t('REMOVE_MESSAGE_SINGULAR', slots.Item.original));
-          }
+          handler.emit(':tell', handler.t('REMOVE_MESSAGE', slots.Item.original));
         })
         .catch(function(err) {
             console.log(err);

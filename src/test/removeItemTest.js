@@ -62,8 +62,8 @@ describe("Testing RemoveItem intent", function() {
         })
 
         it("should have an affirmative message", function() {
-          var expected = [sprintf(strings.REMOVE_MESSAGE_PLURAL, pluralize(testItemName)), sprintf(strings.REMOVE_MESSAGE_SINGULAR, pluralize.singular(testItemName))]
-          expect(speechResponse.response.outputSpeech.ssml).to.be.oneOf(expected.map(ssmlWrap))
+          var expected = ssmlWrap(sprintf(strings.REMOVE_MESSAGE, testItemName))
+          expect(speechResponse.response.outputSpeech.ssml).to.be.equal(expected)
         })
 
         it("should end the alexa session", function() {
@@ -101,8 +101,8 @@ describe("Testing RemoveItem intent", function() {
         })
 
         it("should have an affirmative message", function() {
-          var expected = [sprintf(strings.REMOVE_MESSAGE_PLURAL, pluralize(testItemName)), sprintf(strings.REMOVE_MESSAGE_SINGULAR, pluralize.singular(testItemName))]
-          expect(speechResponse.response.outputSpeech.ssml).to.be.oneOf(expected.map(ssmlWrap))
+          var expected = ssmlWrap(sprintf(strings.REMOVE_MESSAGE, testItemName))
+          expect(speechResponse.response.outputSpeech.ssml).to.be.equal(expected)
         })
 
         it("should end the alexa session", function() {
