@@ -28,7 +28,8 @@
         "remove {Quantity} of my {Item} ",
         "I used {Quantity} of the {Item}",
         "I sold {Quantity} of the {Item}",
-        "I lost {Quantity} of the {Item} "
+        "I lost {Quantity} of the {Item} ",
+        "add {Quantity} more {Item}"
       ],
       "slots": [
         {
@@ -141,7 +142,15 @@
         "Where did I put my {Item}",
         "Where did I put the {Item}",
         "Where is",
-        "Where are"
+        "Where are",
+        "where the {Item} are",
+        "where the {Item} is",
+        "where my {Item} are",
+        "where my {Item} is",
+        "find the {Item}",
+        "find my {Item}",
+        "find something",
+        "find something for me"
       ],
       "slots": [
         {
@@ -257,7 +266,11 @@
         "I have {Quantity} {Item} and placed them in {Location}",
         "I have {Quantity}",
         "I now have {Quantity}",
-        "I am down to {Quantity}"
+        "I am down to {Quantity}",
+        "I have a {Item} {Location}",
+        "I have an {Item} {Location}",
+        "I now have {Quantity} {Item} {Location}",
+        "I am down to {Quantity} {Item} {Location}"
       ],
       "slots": [
         {
