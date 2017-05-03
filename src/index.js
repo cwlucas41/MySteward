@@ -82,9 +82,14 @@ exports.handler = (event, context) => {
 };
 
 function dialogHandler(intentHandler, handler) {
-//  if (intentRequest.dialogState !== "COMPLETED"){
-//    this.emit(':delegate')
-//  } else {
+  if (intentRequest.dialogState === "STARTED") {
+    this.emit(':delegate', this.event.request.intent)
+  }
+
+
+              else if (intentRequest.dialogState !== "COMPLETED"){
+    this.emit(':delegate')
+  } else {
     intentHandler(handler, stewardItems)
-//  }
+  }
 }
