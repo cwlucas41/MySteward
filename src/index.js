@@ -39,7 +39,7 @@ const handlers = {
       // updateLocation(this, stewardItems)
         console.log("It got to the god damn string")
         //dialogHandler()
-        var filledSlots = delegateHandler.call(this)
+        var filledSlots = dialogHandler.call(this)
         updateLocation(this, stewardItems)
     },
 
