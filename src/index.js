@@ -58,12 +58,6 @@ const handlers = {
     updateLocation(this, stewardItems)
   },
 
-  'Affirmative': function() {
-    const responses = this.t('AFFIRMATIVE_MESSAGE');
-    const idx = Math.floor(Math.random() * responses.length);
-    this.emit(':tell', responses[idx]);
-  },
-
   'Error': function() {
     this.emit(':tell', this.t('ERROR_MESSAGE'))
   },

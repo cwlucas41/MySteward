@@ -2,7 +2,6 @@ module.exports = {
   "strings" : {
     'en': {
       translation: {
-        AFFIRMATIVE_MESSAGE: ["Done", "Noted", "I\'ll remember that."],
         ERROR_MESSAGE: "There was a problem, please try again later",
         NO_ITEM_MESSAGE: "There is no such item",
         LOCATION_MESSAGE_SINGULAR: "It is %s",
