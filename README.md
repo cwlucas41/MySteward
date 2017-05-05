@@ -5,8 +5,11 @@ My Steward is an Alexa Skill that allows you to record the amounts, locations, a
 The My Steward skill can be invoked with it's invocation name "My Steward", and then the user simply makes a single vocal request. Example requests might be:
 
 *"I just bought three apples."*
+
 *"How many apples do I have?"*
+
 *"I put my apples in the fridge."*
+
 *"When did I get my apples?"*
 
 These intents can be phrased in many different ways than the above, according to which **intent** is called by the skill.
