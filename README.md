@@ -14,18 +14,18 @@ These intents can be phrased in many different ways than the above, according to
 ## Intents
 There are currently 8 intents used by My Steward to perform functions for the user:
 * Set Quantity
---* How you store items for recollection within My Steward and can be used to set the quantity and location of the item.
+  * How you store items for recollection within My Steward and can be used to set the quantity and location of the item.
 * Increment Quantity
---* Used to increase the amount of an item you have stored
+  * Used to increase the amount of an item you have stored
 * Decrement Quantity
---* Used to decrease the amount of an item you have stored
+  * Used to decrease the amount of an item you have stored
 * Update Location
---* Used to move an item to somewhere else
+  * Used to move an item to somewhere else
 * Remove Item
---* Used to delete an item
+  * Used to delete an item
 * Query Quantity
---* Used to ask how many of an item there are
+  * Used to ask how many of an item there are
 * Query Location
---* Used to ask where something is
+  * Used to ask where something is
 * Query Create Time
---* Used to as when something was added
+  * Used to as when something was added
